@@ -24,25 +24,37 @@ const year = new Date().getFullYear();
       </p>
     </div>
 
-    <div class="flex flex-wrap gap-4 text-sm">
-      <a href="#donar" class="text-gold-bright no-underline hover:text-gold">Donar</a>
-      <a
-        href={whatsappHref()}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-gold-bright no-underline hover:text-gold"
-      >
-        WhatsApp
-      </a>
-      <a
-        href={SITE.instagram}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-muted no-underline hover:text-gold-bright"
-      >
-        Instagram
-      </a>
-      <a href="#quienes-somos" class="text-muted no-underline hover:text-gold-bright">Quiénes somos</a>
+    <div class="flex flex-col gap-3 text-sm sm:items-end">
+      <div class="flex flex-wrap gap-4 sm:justify-end">
+        <a href="#donar" class="text-gold-bright no-underline hover:text-gold">Donar</a>
+        <a
+          href={whatsappHref()}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gold-bright no-underline hover:text-gold"
+        >
+          WhatsApp
+        </a>
+        <a href="#quienes-somos" class="text-muted no-underline hover:text-gold-bright">Quiénes somos</a>
+      </div>
+      <div class="flex flex-col gap-1 sm:items-end">
+        <a
+          href={SITE.instagram.award.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gold-bright no-underline hover:text-gold"
+        >
+          Instagram {SITE.instagram.award.handle}
+        </a>
+        <a
+          href={SITE.instagram.org.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-muted no-underline hover:text-gold-bright"
+        >
+          Instagram {SITE.instagram.org.handle}
+        </a>
+      </div>
     </div>
   </div>
 

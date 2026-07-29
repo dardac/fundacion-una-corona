@@ -41,5 +41,28 @@ import { SITE, whatsappHref } from '../../consts';
     <p class="mt-5 text-sm text-muted" data-reveal="fade" data-reveal-delay="320">
       {SITE.acronym} · {SITE.org}
     </p>
+
+    <div
+      class="mt-6 flex flex-col items-center gap-2 text-sm"
+      data-reveal="fade"
+      data-reveal-delay="380"
+    >
+      <a
+        href={SITE.instagram.award.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-gold-bright no-underline hover:text-gold"
+      >
+        Instagram del premio · {SITE.instagram.award.handle}
+      </a>
+      <a
+        href={SITE.instagram.org.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-muted no-underline hover:text-gold-bright"
+      >
+        Instagram · {SITE.instagram.org.handle}
+      </a>
+    </div>
   </div>
 </section>
