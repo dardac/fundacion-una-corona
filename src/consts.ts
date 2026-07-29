@@ -16,16 +16,8 @@ export const SITE = {
   },
   rif: 'J-31638421-1',
   instagram: {
-    org: {
-      handle: '@Orgbanderainternacional',
-      url: 'https://www.instagram.com/Orgbanderainternacional/',
-      label: 'Organización Bandera Internacional',
-    },
-    award: {
-      handle: '@premiounacoronaporlavida',
-      url: 'https://www.instagram.com/premiounacoronaporlavida/',
-      label: 'Premio Una Corona por la Vida',
-    },
+    handle: '@premiounacoronaporlavida',
+    url: 'https://www.instagram.com/premiounacoronaporlavida/',
   },
   whatsapp: {
     /** +34 695 19 87 16 */
