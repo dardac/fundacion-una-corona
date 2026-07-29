@@ -1,0 +1,44 @@
+---
+const items = [
+  {
+    id: 'mision',
+    title: 'Misión',
+    body: 'Visibilizar, honrar y conectar a los líderes globales que, a través de sus respectivas disciplinas, generan un impacto social medible, defienden los derechos fundamentales y promueven la paz, creando puentes de apoyo directo para el financiamiento de tratamientos oncológicos infantiles, el resguardo de la vejez y la protección animal. También acompañamos a la migración venezolana en la defensa de sus derechos humanos.',
+    reveal: 'left',
+    delay: '80',
+  },
+  {
+    id: 'vision',
+    title: 'Visión',
+    body: 'Consolidarse como el galardón humanitario de mayor prestigio e influencia global, uniendo los continentes americano y europeo en una red perenne de solidaridad, diplomacia, arte y responsabilidad social.',
+    reveal: 'right',
+    delay: '180',
+  },
+] as const;
+---
+
+<section class="section-pad border-t border-gold/10 bg-ink/60">
+  <div class="section-wide">
+    <p
+      class="text-xs font-semibold tracking-[0.24em] text-gold uppercase"
+      data-reveal
+      data-reveal-line
+    >
+      Fundamentos
+    </p>
+    <div class="mt-10 grid gap-16 lg:grid-cols-2 lg:gap-20">
+      {
+        items.map((item) => (
+          <article
+            id={item.id}
+            data-reveal={item.reveal}
+            data-reveal-delay={item.delay}
+          >
+            <h2 class="text-3xl sm:text-4xl">{item.title}</h2>
+            <p class="mt-6 text-base text-muted sm:text-lg">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

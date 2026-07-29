@@ -1,0 +1,88 @@
+---
+const pillars = [
+  {
+    number: '01',
+    title: 'La infancia',
+    body: 'Financiamiento de tratamientos oncológicos y medicamentos esenciales para niños con cáncer en Venezuela.',
+    delay: '100',
+  },
+  {
+    number: '02',
+    title: 'La edad dorada',
+    body: 'Apoyo incondicional, dignificación y resguardo de nuestros abuelitos en los ancianatos.',
+    delay: '200',
+  },
+  {
+    number: '03',
+    title: 'Los más indefensos',
+    body: 'Protección, rescate y defensa de los derechos de los animales en situación de vulnerabilidad.',
+    delay: '300',
+  },
+];
+---
+
+<section id="proposito" class="section-pad border-t border-gold/10">
+  <div class="section-narrow">
+    <p
+      class="text-xs font-semibold tracking-[0.24em] text-gold uppercase"
+      data-reveal
+      data-reveal-line
+    >
+      Propósito
+    </p>
+    <h2 class="mt-4 text-3xl sm:text-4xl" data-reveal data-reveal-delay="80">
+      Premiar a quienes no son indiferentes
+    </h2>
+    <div class="mt-8 space-y-5 text-base text-muted sm:text-lg">
+      <p data-reveal data-reveal-delay="160">
+        En un mundo que clama por empatía, la verdadera grandeza no se mide por títulos,
+        sino por el servicio incondicional a los más vulnerables. El propósito de
+        «Una Corona por la Vida» es premiar la resiliencia, el impacto social y la valentía
+        de aquellos que deciden no ser indiferentes ante las realidades del planeta.
+      </p>
+      <p data-reveal data-reveal-delay="240">
+        Este galardón internacional rompe fronteras para honrar el trabajo de ONGs, activistas,
+        abogados defensores de Derechos Humanos, empresarios filántropos, diplomáticos, médicos,
+        músicos, creadores de contenido enfocados en la concordia digital humanitaria y,
+        de manera muy especial, a los periodistas que defienden la verdad y visibilizan las causas
+        que el mundo suele ignorar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="pilares" class="section-pad border-t border-gold/10 bg-ink/60">
+  <div class="section-wide">
+    <div class="max-w-2xl">
+      <p
+        class="text-xs font-semibold tracking-[0.24em] text-gold uppercase"
+        data-reveal
+        data-reveal-line
+      >
+        Tres pilares
+      </p>
+      <h2 class="mt-4 text-3xl sm:text-4xl" data-reveal data-reveal-delay="80">
+        Un ecosistema de amor
+      </h2>
+      <p class="mt-5 text-base text-muted sm:text-lg" data-reveal data-reveal-delay="140">
+        Cada estatuilla entregada en esta gala sostiene tres pilares sagrados de la fundación.
+      </p>
+    </div>
+
+    <ol class="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      {
+        pillars.map((pillar) => (
+          <li
+            class="border-t border-gold/25 pt-6"
+            data-reveal="scale"
+            data-reveal-delay={pillar.delay}
+          >
+            <p class="font-display text-sm tracking-[0.2em] text-gold">{pillar.number}</p>
+            <h3 class="mt-3 text-2xl text-gold-bright">{pillar.title}</h3>
+            <p class="mt-4 text-sm text-muted sm:text-base">{pillar.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

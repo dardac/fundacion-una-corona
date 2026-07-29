@@ -1,0 +1,72 @@
+---
+import '../styles/global.css';
+import { SITE } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${SITE.campaign} · ${SITE.acronym}`,
+  description = SITE.description,
+} = Astro.props;
+const defaultTitle = `${SITE.campaign} · ${SITE.acronym}`;
+const pageTitle = title === defaultTitle ? `${title} · Madrid ${SITE.event.year}` : `${title} · ${SITE.acronym}`;
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#050505" />
+    <meta name="color-scheme" content="dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={`${SITE.acronym} · ${SITE.campaign}`} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content="/images/logo-emblem.jpg" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/images/logo-emblem.jpg" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{pageTitle}</title>
+  </head>
+  <body class="flex min-h-dvh flex-col overflow-x-hidden">
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-gold focus:px-4 focus:py-2 focus:text-ink focus:outline-none"
+    >
+      Saltar al contenido
+    </a>
+    <slot name="header" />
+    <main id="contenido" class="flex-1">
+      <slot />
+    </main>
+    <slot name="footer" />
+    <script>
+      import '../scripts/scroll-reveal.ts';
+    </script>
+  </body>
+</html>

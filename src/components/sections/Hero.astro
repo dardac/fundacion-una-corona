@@ -1,0 +1,73 @@
+---
+import { SITE, whatsappHref } from '../../consts';
+---
+
+<section
+  id="inicio"
+  class="relative flex min-h-[100dvh] items-end overflow-hidden pb-16 pt-10 sm:items-center sm:pb-24 sm:pt-16"
+>
+  <div
+    class="pointer-events-none absolute inset-0"
+    aria-hidden="true"
+    style="background:
+      radial-gradient(ellipse 70% 50% at 50% 20%, color-mix(in oklab, var(--color-gold) 18%, transparent), transparent 60%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, color-mix(in oklab, var(--color-gold-deep) 22%, transparent), transparent 55%),
+      linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+      animation: soft-glow 8s ease-in-out infinite;"
+  >
+  </div>
+
+  <div class="section-wide relative z-10 grid items-center gap-10 px-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:px-10">
+    <div class="order-2 text-center lg:order-1 lg:text-left">
+      <p
+        class="reveal text-xs font-semibold tracking-[0.28em] text-gold uppercase sm:text-sm"
+        data-reveal-line
+      >
+        {SITE.acronym} · {SITE.org}
+      </p>
+      <h1 class="reveal reveal-delay-1 mt-5 font-display text-4xl leading-tight text-gold-bright sm:text-5xl lg:text-6xl">
+        Una Corona<br class="hidden sm:block" /> por la Vida
+      </h1>
+      <p class="reveal reveal-delay-2 mx-auto mt-6 max-w-xl text-base text-muted sm:text-lg lg:mx-0">
+        Recaudación organizada por {SITE.acronym}. {SITE.tagline}. Gala en Madrid {SITE.event.year}.
+      </p>
+      <div class="reveal reveal-delay-3 mt-10 flex flex-col items-center gap-3 sm:flex-row lg:items-stretch">
+        <a
+          href="#donar"
+          class="bg-gold-sheen inline-flex min-h-12 w-full items-center justify-center rounded-md px-7 text-base font-semibold text-ink no-underline hover:brightness-110 sm:w-auto"
+        >
+          Quiero donar
+        </a>
+        <a
+          href={whatsappHref()}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-12 w-full items-center justify-center rounded-md border border-gold/40 px-7 text-base text-gold-bright no-underline hover:border-gold hover:bg-gold/10 sm:w-auto"
+        >
+          Hablar por WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2 order-1 flex justify-center lg:order-2">
+      <img
+        src="/images/logo-emblem.jpg"
+        alt={`${SITE.acronym} — ${SITE.campaign}`}
+        width="903"
+        height="1024"
+        class="float-soft h-auto w-[min(78vw,22rem)] object-contain drop-shadow-[0_20px_60px_rgba(212,175,55,0.18)] sm:w-[min(70vw,26rem)]"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  // Hero eyebrow line grows after load
+  const line = document.querySelector('#inicio [data-reveal-line]');
+  if (line && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.requestAnimationFrame(() => line.classList.add('is-revealed'));
+  } else {
+    line?.classList.add('is-revealed');
+  }
+</script>

@@ -1,0 +1,45 @@
+---
+import { SITE, whatsappHref } from '../../consts';
+---
+
+<section id="contacto" class="section-pad border-t border-gold/10">
+  <div class="section-narrow text-center">
+    <p
+      class="text-xs font-semibold tracking-[0.24em] text-gold uppercase"
+      data-reveal
+      data-reveal-line
+    >
+      Contacto
+    </p>
+    <h2 class="mt-4 text-3xl sm:text-4xl" data-reveal data-reveal-delay="80">
+      Estamos para acompañarte
+    </h2>
+    <p
+      class="mx-auto mt-6 max-w-xl text-base text-muted sm:text-lg"
+      data-reveal
+      data-reveal-delay="160"
+    >
+      ¿Quieres donar a la recaudación {SITE.campaign}, conocer más sobre la gala en Madrid {SITE.event.year} o sumarte a la causa de {SITE.acronym}? Escríbenos por WhatsApp.
+    </p>
+
+    <a
+      href={whatsappHref()}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bg-gold-sheen mt-10 inline-flex min-h-14 items-center justify-center gap-3 rounded-md px-8 text-base font-semibold text-ink no-underline hover:brightness-110"
+      data-reveal="scale"
+      data-reveal-delay="240"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path
+          d="M12.04 2c-5.46 0-9.91 4.43-9.91 9.9 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.9-4.44 9.9-9.91C21.94 6.43 17.5 2 12.04 2zm5.79 14.09c-.24.68-1.4 1.25-1.94 1.33-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.82-4.2-4.97-4.39-.14-.19-1.2-1.6-1.2-3.05s.76-2.16 1.03-2.46c.27-.3.59-.37.79-.37h.57c.18 0 .42-.07.66.5.24.58.82 2 .89 2.14.07.14.12.3.02.49-.1.19-.14.3-.28.47-.14.16-.3.36-.42.49-.14.14-.28.29-.12.56.16.28.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.17 1.34.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.61-.14.24.09 1.54.73 1.8.86.27.14.45.2.52.31.07.12.07.68-.17 1.36z"
+        ></path>
+      </svg>
+      WhatsApp {SITE.whatsapp.display}
+    </a>
+
+    <p class="mt-5 text-sm text-muted" data-reveal="fade" data-reveal-delay="320">
+      {SITE.acronym} · {SITE.org}
+    </p>
+  </div>
+</section>
