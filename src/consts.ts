@@ -27,17 +27,6 @@ export const SITE = {
       'Hola, quiero apoyar a F.I.A.H. en la recaudación Una Corona por la Vida. ¿Cómo puedo donar?',
   },
   payment: {
-    conceptHint: 'Donación Una Corona por la Vida — F.I.A.H.',
-    bbva: {
-      bank: 'BBVA',
-      beneficiary: 'Marilanda Sánchez',
-      iban: 'ES11 0182 7594 3502 0180 2363',
-      address: 'Av. Principal la Carlota',
-      swift: 'BBVAESMMXXX',
-    },
-    bizum: {
-      phones: ['695 198 716', '+34 695 19 87 16'],
-    },
     zelle: {
       email: 'mariaftuozzolo@gmail.com',
     },

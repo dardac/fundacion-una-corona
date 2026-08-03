@@ -2,24 +2,8 @@
 import { SITE, whatsappHref } from '../../consts';
 
 const { payment } = SITE;
-
-const methods = [
-  {
-    id: 'zelle',
-    label: 'Ver datos para pagos por Zelle',
-    hideLabel: 'Ocultar datos de Zelle',
-  },
-  {
-    id: 'bizum',
-    label: 'Ver datos para pagos por Bizum',
-    hideLabel: 'Ocultar datos de Bizum',
-  },
-  {
-    id: 'bbva',
-    label: 'Ver datos de la cuenta BBVA',
-    hideLabel: 'Ocultar datos de BBVA',
-  },
-] as const;
+const showLabel = 'Ver datos para pagos por Zelle';
+const hideLabel = 'Ocultar datos de Zelle';
 ---
 
 <section id="donar" class="section-pad border-t border-gold/10 bg-ink/60">
@@ -48,106 +32,58 @@ const methods = [
       </a>
     </div>
 
-    <div class="space-y-3" role="region" aria-label="Métodos de pago">
+    <div class="space-y-3" role="region" aria-label="Método de pago">
       <h3 class="mb-2 text-xl text-gold-bright" data-reveal="right" data-reveal-delay="60">
-        Métodos de pago
+        Método de pago
       </h3>
       <p class="mb-6 text-sm text-muted" data-reveal="right" data-reveal-delay="120">
-        Elige un método para ver los datos.
+        Donaciones por Zelle.
       </p>
 
-      {
-        methods.map((method, index) => (
-          <div
-            class="overflow-hidden rounded-lg border border-gold/20 bg-void/80"
-            data-reveal="right"
-            data-reveal-delay={String(180 + index * 100)}
+      <div
+        class="overflow-hidden rounded-lg border border-gold/20 bg-void/80"
+        data-reveal="right"
+        data-reveal-delay="180"
+      >
+        <button
+          type="button"
+          class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm text-gold-bright transition-colors hover:bg-gold/5 sm:text-base"
+          aria-expanded="false"
+          aria-controls="panel-zelle"
+          data-payment-toggle
+          data-hide-label={hideLabel}
+          data-show-label={showLabel}
+        >
+          <span data-payment-label>{showLabel}</span>
+          <svg
+            class="h-5 w-5 shrink-0 text-gold transition-transform duration-300"
+            data-payment-chevron
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
           >
-            <button
-              type="button"
-              class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm text-gold-bright transition-colors hover:bg-gold/5 sm:text-base"
-              aria-expanded="false"
-              aria-controls={`panel-${method.id}`}
-              data-payment-toggle
-              data-hide-label={method.hideLabel}
-              data-show-label={method.label}
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-              <span data-payment-label>{method.label}</span>
-              <svg
-                class="h-5 w-5 shrink-0 text-gold transition-transform duration-300"
-                data-payment-chevron
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M6 9l6 6 6-6"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
+            </path>
+          </svg>
+        </button>
 
-            <div
-              id={`panel-${method.id}`}
-              class="payment-panel"
-              data-payment-panel
-              hidden
-            >
-              <div class="border-t border-gold/15 px-5 pb-5 pt-4">
-                {method.id === 'zelle' && (
-                  <dl class="space-y-3 text-sm sm:text-base">
-                    <div>
-                      <dt class="text-xs tracking-wide text-muted uppercase">Zelle</dt>
-                      <dd class="mt-1 break-all text-cream">{payment.zelle.email}</dd>
-                    </div>
-                  </dl>
-                )}
-
-                {method.id === 'bizum' && (
-                  <dl class="space-y-3 text-sm sm:text-base">
-                    <div>
-                      <dt class="text-xs tracking-wide text-muted uppercase">Bizum</dt>
-                      <dd class="mt-2 space-y-1 text-cream">
-                        {payment.bizum.phones.map((phone) => (
-                          <p>{phone}</p>
-                        ))}
-                      </dd>
-                    </div>
-                  </dl>
-                )}
-
-                {method.id === 'bbva' && (
-                  <dl class="space-y-3 text-sm sm:text-base">
-                    <div>
-                      <dt class="text-xs tracking-wide text-muted uppercase">Banco</dt>
-                      <dd class="mt-1 text-cream">{payment.bbva.bank}</dd>
-                    </div>
-                    <div>
-                      <dt class="text-xs tracking-wide text-muted uppercase">Beneficiario</dt>
-                      <dd class="mt-1 text-cream">{payment.bbva.beneficiary}</dd>
-                    </div>
-                    <div>
-                      <dt class="text-xs tracking-wide text-muted uppercase">IBAN</dt>
-                      <dd class="mt-1 break-all font-mono text-cream">{payment.bbva.iban}</dd>
-                    </div>
-                    <div>
-                      <dt class="text-xs tracking-wide text-muted uppercase">SWIFT</dt>
-                      <dd class="mt-1 font-mono text-cream">{payment.bbva.swift}</dd>
-                    </div>
-                    <div>
-                      <dt class="text-xs tracking-wide text-muted uppercase">Dirección</dt>
-                      <dd class="mt-1 text-cream">{payment.bbva.address}</dd>
-                    </div>
-                  </dl>
-                )}
+        <div id="panel-zelle" class="payment-panel" data-payment-panel hidden>
+          <div class="border-t border-gold/15 px-5 pb-5 pt-4">
+            <dl class="space-y-3 text-sm sm:text-base">
+              <div>
+                <dt class="text-xs tracking-wide text-muted uppercase">Zelle</dt>
+                <dd class="mt-1 break-all text-cream">{payment.zelle.email}</dd>
               </div>
-            </div>
+            </dl>
           </div>
-        ))
-      }
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -179,37 +115,21 @@ const methods = [
 </style>
 
 <script>
-  const toggles = document.querySelectorAll('[data-payment-toggle]');
-
-  toggles.forEach((button) => {
+  const button = document.querySelector('[data-payment-toggle]');
+  if (button instanceof HTMLElement) {
     button.addEventListener('click', () => {
       const panelId = button.getAttribute('aria-controls');
       const panel = panelId ? document.getElementById(panelId) : null;
-      if (!panel || !(button instanceof HTMLElement)) return;
+      if (!panel) return;
 
       const willOpen = button.getAttribute('aria-expanded') !== 'true';
-
-      // Cierra los demás paneles
-      toggles.forEach((other) => {
-        if (!(other instanceof HTMLElement) || other === button) return;
-        const otherId = other.getAttribute('aria-controls');
-        const otherPanel = otherId ? document.getElementById(otherId) : null;
-        other.setAttribute('aria-expanded', 'false');
-        otherPanel?.classList.remove('is-open');
-        otherPanel?.setAttribute('hidden', '');
-        const otherLabel = other.querySelector('[data-payment-label]');
-        const otherChevron = other.querySelector('[data-payment-chevron]');
-        if (otherLabel) otherLabel.textContent = other.dataset.showLabel ?? '';
-        otherChevron?.classList.remove('rotate-180');
-      });
-
       button.setAttribute('aria-expanded', String(willOpen));
+
       const label = button.querySelector('[data-payment-label]');
       const chevron = button.querySelector('[data-payment-chevron]');
 
       if (willOpen) {
         panel.removeAttribute('hidden');
-        // Force reflow so the open transition runs
         void panel.offsetHeight;
         panel.classList.add('is-open');
         if (label) label.textContent = button.dataset.hideLabel ?? '';
@@ -225,5 +145,5 @@ const methods = [
         }, 320);
       }
     });
-  });
+  }
 </script>
