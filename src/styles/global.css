@@ -147,6 +147,10 @@
     transition:
       opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
       transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay);
+  }
+
+  /* Avoid leaving will-change on forever — it can jank mobile scroll */
+  [data-reveal]:not(.is-revealed) {
     will-change: opacity, transform;
   }
 
