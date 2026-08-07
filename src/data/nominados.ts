@@ -1,5 +1,5 @@
 export const NOMINADOS = {
-  edition: 'I Edición España',
+  edition: 'I Edición España 2026',
   title: 'Listado de los 12 nominados',
   subtitle: 'Premio Humanitario Una Corona por la Vida',
   note: 'Se entregan exclusivamente de forma presencial.',
@@ -67,9 +67,3 @@ export const NOMINADOS = {
     },
   ],
 } as const;
-
-export const RECOGNITION_LINKS = [
-  { href: '#nominados', label: 'Nominados' },
-  { href: '#honores', label: 'Honores' },
-  { href: '#embajadores', label: 'Embajadores' },
-] as const;

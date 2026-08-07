@@ -1,11 +1,17 @@
 ---
-import { NOMINADOS, RECOGNITION_LINKS } from '../../data/nominados';
+import { NOMINADOS } from '../../data/nominados';
+import { HONORES, RECOGNITION_TABS } from '../../data/honores';
+import { EMBAJADORES } from '../../data/embajadores';
 
-const first = NOMINADOS.items[0];
+const firstNominado = NOMINADOS.items[0];
+const firstHonorCat = HONORES.categories[0];
+const firstHonorItem = firstHonorCat.items[0];
+const firstEmbajadorCat = EMBAJADORES.categories[0];
+const firstEmbajador = firstEmbajadorCat.items[0];
 ---
 
 <section id="reconocimientos" class="section-pad overflow-x-clip border-t border-gold/10">
-  <div class="section-wide min-w-0">
+  <div class="section-wide min-w-0" data-recognitions>
     <div class="max-w-3xl">
       <p
         class="text-xs font-semibold tracking-[0.24em] text-gold uppercase"
@@ -19,48 +25,60 @@ const first = NOMINADOS.items[0];
       </h2>
     </div>
 
-    <nav
-      class="mt-8 flex flex-wrap gap-2 border-y border-gold/15 py-4"
+    <!-- Tabs principales -->
+    <div
+      class="mt-6 flex flex-wrap gap-2 border-y border-gold/15 py-3"
+      role="tablist"
       aria-label="Subsecciones de reconocimientos"
       data-reveal
       data-reveal-delay="120"
     >
       {
-        RECOGNITION_LINKS.map((link) => (
-          <a
-            href={link.href}
-            class="rounded-md border border-gold/25 px-4 py-2 text-sm text-gold-bright no-underline transition hover:border-gold hover:bg-gold/10"
+        RECOGNITION_TABS.map((tab, index) => (
+          <button
+            type="button"
+            role="tab"
+            id={`recog-tab-${tab.id}`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-controls={`recog-panel-${tab.id}`}
+            tabindex={index === 0 ? 0 : -1}
+            class="rounded-md border border-gold/25 px-3 py-1.5 text-sm text-gold-bright transition hover:border-gold hover:bg-gold/10 data-[active=true]:border-gold data-[active=true]:bg-gold/15"
+            data-recog-tab
+            data-panel={tab.id}
+            data-active={index === 0 ? 'true' : 'false'}
           >
-            {link.label}
-          </a>
+            {tab.label}
+          </button>
         ))
       }
-    </nav>
+    </div>
 
-    <!-- Nominados -->
-    <div id="nominados" class="mt-14 scroll-mt-28" data-nominados>
-      <div class="max-w-3xl" data-reveal>
+    <!-- Panel Nominados -->
+    <div
+      id="recog-panel-nominados"
+      role="tabpanel"
+      aria-labelledby="recog-tab-nominados"
+      class="mt-8"
+      data-recog-panel
+      data-panel="nominados"
+      data-nominados
+    >
+      <div class="max-w-3xl">
         <p class="text-xs font-semibold tracking-[0.24em] text-gold uppercase">
           {NOMINADOS.edition}
         </p>
-        <h3 class="mt-4 text-2xl text-gold-bright sm:text-3xl">
-          {NOMINADOS.title}
-        </h3>
-        <p class="mt-2 font-display text-base text-cream/90 sm:text-lg">
-          {NOMINADOS.subtitle}
-        </p>
+        <h3 class="mt-2 text-xl text-gold-bright sm:text-2xl">{NOMINADOS.title}</h3>
+        <p class="mt-1 font-display text-sm text-cream/90 sm:text-base">{NOMINADOS.subtitle}</p>
       </div>
 
       <div
-        class="mt-10 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-stretch lg:gap-12"
+        class="mt-6 grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-stretch lg:gap-8"
       >
         <div class="relative min-h-0 border border-gold/20 bg-void/40 lg:h-0 lg:min-h-full">
           <div
-            class="nominados-scroll max-h-[22rem] divide-y divide-gold/15 overflow-y-auto overscroll-contain lg:absolute lg:inset-0 lg:max-h-none"
+            class="recog-scroll max-h-[16rem] divide-y divide-gold/15 overflow-y-auto overscroll-contain lg:absolute lg:inset-0 lg:max-h-none"
             role="tablist"
             aria-label="Nominados"
-            data-nominado-list
-            data-reveal
           >
             {
               NOMINADOS.items.map((item, index) => (
@@ -71,7 +89,7 @@ const first = NOMINADOS.items[0];
                   aria-selected={index === 0 ? 'true' : 'false'}
                   aria-controls="nominado-panel"
                   tabindex={index === 0 ? 0 : -1}
-                  class="group flex w-full items-center gap-4 px-4 py-4 text-left transition hover:bg-gold/5 data-[active=true]:border-l-2 data-[active=true]:border-l-gold data-[active=true]:bg-gold/10 sm:gap-5 sm:px-5"
+                  class="group flex w-full items-center gap-3 px-3 py-2.5 text-left transition hover:bg-gold/5 data-[active=true]:border-l-2 data-[active=true]:border-l-gold data-[active=true]:bg-gold/10 sm:gap-4 sm:px-4"
                   data-nominado-tab
                   data-name={item.name}
                   data-role={item.role}
@@ -79,19 +97,16 @@ const first = NOMINADOS.items[0];
                   data-index={String(index + 1).padStart(2, '0')}
                   data-active={index === 0 ? 'true' : 'false'}
                 >
-                  <span class="font-display text-sm tracking-[0.14em] text-gold transition group-data-[active=true]:text-gold-bright">
+                  <span class="font-display text-xs tracking-[0.14em] text-gold transition group-data-[active=true]:text-gold-bright">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <span class="min-w-0 flex-1">
-                    <span class="block text-sm text-cream transition group-data-[active=true]:text-gold-bright sm:text-base">
+                    <span class="block text-sm text-cream transition group-data-[active=true]:text-gold-bright">
                       {item.name}
                     </span>
-                    <span class="mt-0.5 block text-xs text-muted sm:hidden">{item.place}</span>
+                    <span class="mt-0.5 block text-[11px] text-muted sm:hidden">{item.place}</span>
                   </span>
-                  <span
-                    class="hidden text-xs tracking-wide text-muted uppercase sm:inline"
-                    aria-hidden="true"
-                  >
+                  <span class="hidden text-[11px] tracking-wide text-muted uppercase sm:inline" aria-hidden="true">
                     {item.place}
                   </span>
                 </button>
@@ -104,145 +119,505 @@ const first = NOMINADOS.items[0];
           id="nominado-panel"
           role="tabpanel"
           aria-labelledby="nominado-tab-0"
-          class="border border-gold/20 bg-ink/50 p-6 sm:p-8"
-          data-reveal
-          data-reveal-delay="100"
+          class="border border-gold/20 bg-ink/50 p-4 sm:p-5"
         >
-          <p
-            class="font-display text-4xl tracking-[0.12em] text-gold/40 sm:text-5xl"
-            data-nominado-index
-          >
-            {String(1).padStart(2, '0')}
+          <p class="font-display text-2xl tracking-[0.12em] text-gold/35 sm:text-3xl" data-nominado-index>
+            01
           </p>
-          <h4 class="mt-4 text-2xl text-gold-bright sm:text-3xl" data-nominado-name>
-            {first.name}
+          <h4 class="mt-2 text-lg text-gold-bright sm:text-xl" data-nominado-name>
+            {firstNominado.name}
           </h4>
-          <p
-            class="mt-2 text-xs font-semibold tracking-[0.18em] text-gold uppercase"
-            data-nominado-place
-          >
-            {first.place}
+          <p class="mt-1 text-[11px] font-semibold tracking-[0.16em] text-gold uppercase" data-nominado-place>
+            {firstNominado.place}
           </p>
-          <p class="mt-6 text-base text-muted sm:text-lg" data-nominado-role>
-            {first.role}
+          <p class="mt-3 text-sm text-muted" data-nominado-role>
+            {firstNominado.role}
           </p>
-          <p class="mt-8 border-t border-gold/15 pt-6 text-sm text-cream/90">
-            {NOMINADOS.note}
-          </p>
+          <p class="mt-4 border-t border-gold/15 pt-3 text-xs text-cream/90">{NOMINADOS.note}</p>
         </div>
       </div>
     </div>
 
-    <!-- Honores (contenido pendiente) -->
-    <div id="honores" class="mt-20 scroll-mt-28 border-t border-gold/15 pt-12">
-      <div class="max-w-3xl" data-reveal>
-        <p class="text-xs font-semibold tracking-[0.24em] text-gold uppercase">Honores</p>
-        <h3 class="mt-4 text-2xl text-gold-bright sm:text-3xl">Honores</h3>
+    <!-- Panel Honores -->
+    <div
+      id="recog-panel-honores"
+      role="tabpanel"
+      aria-labelledby="recog-tab-honores"
+      class="mt-8 hidden"
+      hidden
+      data-recog-panel
+      data-panel="honores"
+      data-honores
+    >
+      <div class="max-w-3xl">
+        <p class="text-xs font-semibold tracking-[0.24em] text-gold uppercase">{NOMINADOS.edition}</p>
+        <h3 class="mt-2 text-xl text-gold-bright sm:text-2xl">Honores</h3>
       </div>
+
+      <!-- Subcategorías -->
+      <div class="mt-5 flex min-w-0 items-center gap-2">
+        <button
+          type="button"
+          class="hidden h-9 w-9 shrink-0 items-center justify-center border border-gold/30 text-gold-bright transition hover:border-gold hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-30 md:inline-flex"
+          data-honor-cat-prev
+          aria-label="Categoría anterior"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+
+        <div
+          class="min-w-0 flex-1 overflow-x-auto overscroll-x-contain pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          role="tablist"
+          aria-label="Categorías de honores"
+          data-honor-cat-scroller
+        >
+          <div class="flex w-max gap-2">
+            {
+              HONORES.categories.map((cat, index) => (
+                <button
+                  type="button"
+                  role="tab"
+                  id={`honor-cat-${cat.id}`}
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                  aria-controls="honor-detail"
+                  tabindex={index === 0 ? 0 : -1}
+                  class="shrink-0 rounded-md border border-gold/25 px-2.5 py-1.5 text-xs text-gold-bright transition hover:border-gold hover:bg-gold/10 data-[active=true]:border-gold data-[active=true]:bg-gold/15"
+                  data-honor-cat
+                  data-cat-id={cat.id}
+                  data-active={index === 0 ? 'true' : 'false'}
+                >
+                  {cat.label}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="hidden h-9 w-9 shrink-0 items-center justify-center border border-gold/30 text-gold-bright transition hover:border-gold hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-30 md:inline-flex"
+          data-honor-cat-next
+          aria-label="Categoría siguiente"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+
+      {
+        HONORES.categories.map((cat, catIndex) => (
+          <div
+            class:list={['mt-5', catIndex === 0 ? '' : 'hidden']}
+            hidden={catIndex !== 0}
+            data-honor-category
+            data-cat-id={cat.id}
+            id={catIndex === 0 ? 'honor-detail' : undefined}
+          >
+            <div class="max-w-3xl">
+              <p class="text-[11px] font-semibold tracking-[0.2em] text-gold uppercase">{cat.edition}</p>
+              <h4 class="mt-1 text-base text-gold-bright sm:text-lg">{cat.description}</h4>
+            </div>
+
+            <div class="mt-5 grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-stretch lg:gap-8">
+              <div class="relative min-h-0 border border-gold/20 bg-void/40 lg:h-0 lg:min-h-full">
+                <div class="recog-scroll max-h-[16rem] divide-y divide-gold/15 overflow-y-auto overscroll-contain lg:absolute lg:inset-0 lg:max-h-none">
+                  {cat.items.map((item, index) => (
+                    <button
+                      type="button"
+                      class="group flex w-full items-center gap-3 px-3 py-2.5 text-left transition hover:bg-gold/5 data-[active=true]:border-l-2 data-[active=true]:border-l-gold data-[active=true]:bg-gold/10 sm:gap-4 sm:px-4"
+                      data-honor-item
+                      data-cat-id={cat.id}
+                      data-name={item.name}
+                      data-detail={item.detail}
+                      data-place={item.place}
+                      data-index={String(index + 1).padStart(2, '0')}
+                      data-active={index === 0 ? 'true' : 'false'}
+                    >
+                      <span class="font-display text-xs tracking-[0.14em] text-gold transition group-data-[active=true]:text-gold-bright">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <span class="min-w-0 flex-1">
+                        <span class="block text-sm text-cream transition group-data-[active=true]:text-gold-bright">
+                          {item.name}
+                        </span>
+                        {item.place && (
+                          <span class="mt-0.5 block text-[11px] text-muted sm:hidden">{item.place}</span>
+                        )}
+                      </span>
+                      {item.place && (
+                        <span class="hidden text-[11px] tracking-wide text-muted uppercase sm:inline" aria-hidden="true">
+                          {item.place}
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                class="border border-gold/20 bg-ink/50 p-4 sm:p-5"
+                data-honor-panel
+                data-cat-id={cat.id}
+              >
+                <p class="font-display text-2xl tracking-[0.12em] text-gold/35 sm:text-3xl" data-honor-index>
+                  01
+                </p>
+                <h4 class="mt-2 text-lg text-gold-bright sm:text-xl" data-honor-name>
+                  {catIndex === 0 ? firstHonorItem.name : cat.items[0].name}
+                </h4>
+                {cat.items[0].place && (
+                  <p
+                    class="mt-1 text-[11px] font-semibold tracking-[0.16em] text-gold uppercase"
+                    data-honor-place
+                  >
+                    {cat.items[0].place}
+                  </p>
+                )}
+                {!cat.items[0].place && (
+                  <p
+                    class="mt-1 hidden text-[11px] font-semibold tracking-[0.16em] text-gold uppercase"
+                    data-honor-place
+                  >
+                  </p>
+                )}
+                <p class="mt-3 text-sm text-muted" data-honor-detail>
+                  {cat.items[0].detail}
+                </p>
+                <p class="mt-4 border-t border-gold/15 pt-3 text-xs text-cream/90">{HONORES.note}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
     </div>
 
-    <!-- Embajadores (contenido pendiente) -->
-    <div id="embajadores" class="mt-20 scroll-mt-28 border-t border-gold/15 pt-12">
-      <div class="max-w-3xl" data-reveal>
+    <!-- Panel Embajadores -->
+    <div
+      id="recog-panel-embajadores"
+      role="tabpanel"
+      aria-labelledby="recog-tab-embajadores"
+      class="mt-8 hidden"
+      hidden
+      data-recog-panel
+      data-panel="embajadores"
+      data-embajadores
+    >
+      <div class="max-w-3xl">
         <p class="text-xs font-semibold tracking-[0.24em] text-gold uppercase">
           Embajadores internacionales
         </p>
-        <h3 class="mt-4 text-2xl text-gold-bright sm:text-3xl">
-          Embajadores internacionales
-        </h3>
+        <h3 class="mt-2 text-xl text-gold-bright sm:text-2xl">{EMBAJADORES.title}</h3>
+      </div>
+
+      <div class="mt-6 grid min-w-0 gap-5 lg:grid-cols-[13.5rem_minmax(0,1fr)] lg:items-start lg:gap-8">
+        <!-- Países: chips horizontales en mobile, lista vertical en desktop -->
+        <div class="min-w-0">
+          <div
+            class="min-w-0 overflow-x-auto overscroll-x-contain pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:overflow-visible lg:border lg:border-gold/20 lg:bg-void/40 lg:pb-0"
+            role="tablist"
+            aria-label="Países de embajadores"
+            data-embajador-cat-scroller
+          >
+            <div class="flex w-max gap-2 lg:w-full lg:flex-col lg:gap-0 lg:divide-y lg:divide-gold/15">
+              {
+                EMBAJADORES.categories.map((cat, index) => {
+                  const person = cat.items[0];
+                  return (
+                    <button
+                      type="button"
+                      role="tab"
+                      id={`embajador-cat-${cat.id}`}
+                      aria-selected={index === 0 ? 'true' : 'false'}
+                      aria-controls="embajador-panel"
+                      tabindex={index === 0 ? 0 : -1}
+                      class="group shrink-0 rounded-md border border-gold/25 px-2.5 py-1.5 text-left text-xs text-gold-bright transition hover:border-gold hover:bg-gold/10 data-[active=true]:border-gold data-[active=true]:bg-gold/15 lg:rounded-none lg:border-0 lg:border-l-2 lg:border-l-transparent lg:px-4 lg:py-3 lg:hover:bg-gold/5 lg:data-[active=true]:border-l-gold lg:data-[active=true]:bg-gold/10"
+                      data-embajador-cat
+                      data-cat-id={cat.id}
+                      data-name={person.name}
+                      data-detail={person.detail}
+                      data-place={person.place}
+                      data-photo={person.photo}
+                      data-active={index === 0 ? 'true' : 'false'}
+                    >
+                      <span class="block lg:text-sm lg:text-cream lg:group-data-[active=true]:text-gold-bright">
+                        {cat.label}
+                      </span>
+                      <span class="mt-0.5 hidden text-[11px] text-muted lg:block">{person.name}</span>
+                    </button>
+                  );
+                })
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Perfil -->
+        <div
+          id="embajador-panel"
+          class="border border-gold/20 bg-ink/50 p-4 sm:p-5"
+          data-embajador-panel
+        >
+          <div class="grid items-center gap-5 sm:grid-cols-[9rem_1fr] sm:gap-6 lg:grid-cols-[11rem_1fr]">
+            <div class="mx-auto aspect-[4/5] w-28 overflow-hidden border border-gold/20 sm:mx-0 sm:w-full">
+              <img
+                src={firstEmbajador.photo}
+                alt={firstEmbajador.name}
+                width="220"
+                height="275"
+                class="h-full w-full object-cover object-top"
+                data-embajador-photo
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="min-w-0 text-center sm:text-left">
+              <h4 class="text-lg text-gold-bright sm:text-xl" data-embajador-name>
+                {firstEmbajador.name}
+              </h4>
+              <p
+                class="mt-1 text-[11px] font-semibold tracking-[0.16em] text-gold uppercase"
+                data-embajador-place
+              >
+                {firstEmbajador.place}
+              </p>
+              <p class="mt-3 text-sm text-muted" data-embajador-detail>
+                {firstEmbajador.detail}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .nominados-scroll {
+  .recog-scroll {
     scrollbar-width: thin;
     scrollbar-color: color-mix(in oklab, var(--color-gold) 55%, transparent) transparent;
   }
 
-  .nominados-scroll::-webkit-scrollbar {
+  .recog-scroll::-webkit-scrollbar {
     width: 6px;
   }
 
-  .nominados-scroll::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .nominados-scroll::-webkit-scrollbar-thumb {
+  .recog-scroll::-webkit-scrollbar-thumb {
     border-radius: 999px;
     background: color-mix(in oklab, var(--color-gold) 45%, transparent);
   }
 </style>
 
 <script>
-  const root = document.querySelector('[data-nominados]');
-  if (root) {
-    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-nominado-tab]'));
-    const panel = document.getElementById('nominado-panel');
-    const nameEl = root.querySelector('[data-nominado-name]');
-    const roleEl = root.querySelector('[data-nominado-role]');
-    const placeEl = root.querySelector('[data-nominado-place]');
-    const indexEl = root.querySelector('[data-nominado-index]');
+  const root = document.querySelector('[data-recognitions]');
+  if (!root) {
+    // no-op
+  } else {
+    // --- Tabs principales ---
+    const mainTabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-recog-tab]'));
+    const mainPanels = Array.from(root.querySelectorAll<HTMLElement>('[data-recog-panel]'));
 
-    function setActive(tab: HTMLButtonElement) {
-      tabs.forEach((other) => {
-        const active = other === tab;
-        other.dataset.active = String(active);
-        other.setAttribute('aria-selected', String(active));
-        other.tabIndex = active ? 0 : -1;
+    function showMainPanel(id: string) {
+      mainTabs.forEach((tab) => {
+        const active = tab.dataset.panel === id;
+        tab.dataset.active = String(active);
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
       });
-
-      tab.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-
-      const nextName = tab.dataset.name ?? '';
-      const nextRole = tab.dataset.role ?? '';
-      const nextPlace = tab.dataset.place ?? '';
-      const nextIndex = tab.dataset.index ?? '';
-
-      [nameEl, roleEl, placeEl, indexEl].forEach((el) => {
-        if (!(el instanceof HTMLElement)) return;
-        el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(0.35rem)';
+      mainPanels.forEach((panel) => {
+        const active = panel.dataset.panel === id;
+        panel.classList.toggle('hidden', !active);
+        panel.hidden = !active;
       });
-
-      window.setTimeout(() => {
-        if (nameEl) nameEl.textContent = nextName;
-        if (roleEl) roleEl.textContent = nextRole;
-        if (placeEl) placeEl.textContent = nextPlace;
-        if (indexEl) indexEl.textContent = nextIndex;
-        if (panel) panel.setAttribute('aria-labelledby', tab.id);
-
-        [nameEl, roleEl, placeEl, indexEl].forEach((el) => {
-          if (!(el instanceof HTMLElement)) return;
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        });
-      }, 150);
     }
 
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => setActive(tab));
+    mainTabs.forEach((tab) => {
+      tab.addEventListener('click', () => showMainPanel(tab.dataset.panel ?? 'nominados'));
     });
 
-    root.addEventListener('keydown', (event) => {
-      if (!(event instanceof KeyboardEvent)) return;
-      const current = tabs.findIndex((tab) => tab.dataset.active === 'true');
-      if (current < 0) return;
+    // --- Nominados ---
+    const nominadosRoot = root.querySelector('[data-nominados]');
+    if (nominadosRoot) {
+      const tabs = Array.from(nominadosRoot.querySelectorAll<HTMLButtonElement>('[data-nominado-tab]'));
+      const panel = document.getElementById('nominado-panel');
+      const nameEl = nominadosRoot.querySelector('[data-nominado-name]');
+      const roleEl = nominadosRoot.querySelector('[data-nominado-role]');
+      const placeEl = nominadosRoot.querySelector('[data-nominado-place]');
+      const indexEl = nominadosRoot.querySelector('[data-nominado-index]');
 
-      let next = current;
-      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = (current + 1) % tabs.length;
-      if (event.key === 'ArrowUp' || event.key === 'ArrowLeft')
-        next = (current - 1 + tabs.length) % tabs.length;
-      if (event.key === 'Home') next = 0;
-      if (event.key === 'End') next = tabs.length - 1;
+      function setNominado(tab: HTMLButtonElement) {
+        tabs.forEach((other) => {
+          const active = other === tab;
+          other.dataset.active = String(active);
+          other.setAttribute('aria-selected', String(active));
+          other.tabIndex = active ? 0 : -1;
+        });
+        tab.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 
-      if (next !== current) {
-        event.preventDefault();
-        tabs[next]?.focus();
-        setActive(tabs[next]!);
+        const apply = () => {
+          if (nameEl) nameEl.textContent = tab.dataset.name ?? '';
+          if (roleEl) roleEl.textContent = tab.dataset.role ?? '';
+          if (placeEl) placeEl.textContent = tab.dataset.place ?? '';
+          if (indexEl) indexEl.textContent = tab.dataset.index ?? '';
+          if (panel) panel.setAttribute('aria-labelledby', tab.id);
+        };
+
+        [nameEl, roleEl, placeEl, indexEl].forEach((el) => {
+          if (el instanceof HTMLElement) {
+            el.style.transition = 'opacity 0.25s ease';
+            el.style.opacity = '0';
+          }
+        });
+        window.setTimeout(() => {
+          apply();
+          [nameEl, roleEl, placeEl, indexEl].forEach((el) => {
+            if (el instanceof HTMLElement) el.style.opacity = '1';
+          });
+        }, 140);
       }
-    });
+
+      tabs.forEach((tab) => tab.addEventListener('click', () => setNominado(tab)));
+    }
+
+    // --- Honores: categorías + ítems ---
+    const honoresRoot = root.querySelector('[data-honores]');
+    if (honoresRoot) {
+      const catButtons = Array.from(honoresRoot.querySelectorAll<HTMLButtonElement>('[data-honor-cat]'));
+      const categories = Array.from(honoresRoot.querySelectorAll<HTMLElement>('[data-honor-category]'));
+      const catPrev = honoresRoot.querySelector<HTMLButtonElement>('[data-honor-cat-prev]');
+      const catNext = honoresRoot.querySelector<HTMLButtonElement>('[data-honor-cat-next]');
+
+      function updateCatArrows(index: number) {
+        if (catPrev) catPrev.disabled = index <= 0;
+        if (catNext) catNext.disabled = index >= catButtons.length - 1;
+      }
+
+      function showHonorCategory(id: string) {
+        let activeIndex = 0;
+        catButtons.forEach((btn, index) => {
+          const active = btn.dataset.catId === id;
+          btn.dataset.active = String(active);
+          btn.setAttribute('aria-selected', String(active));
+          btn.tabIndex = active ? 0 : -1;
+          if (active) {
+            activeIndex = index;
+            btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+          }
+        });
+        categories.forEach((cat) => {
+          const active = cat.dataset.catId === id;
+          cat.classList.toggle('hidden', !active);
+          cat.hidden = !active;
+        });
+        updateCatArrows(activeIndex);
+      }
+
+      function moveHonorCategory(delta: number) {
+        const current = catButtons.findIndex((btn) => btn.dataset.active === 'true');
+        const next = Math.min(catButtons.length - 1, Math.max(0, current + delta));
+        const btn = catButtons[next];
+        if (!btn || next === current) return;
+        showHonorCategory(btn.dataset.catId ?? '');
+      }
+
+      catButtons.forEach((btn) => {
+        btn.addEventListener('click', () => showHonorCategory(btn.dataset.catId ?? ''));
+      });
+      catPrev?.addEventListener('click', () => moveHonorCategory(-1));
+      catNext?.addEventListener('click', () => moveHonorCategory(1));
+      updateCatArrows(0);
+
+      categories.forEach((cat) => {
+        const items = Array.from(cat.querySelectorAll<HTMLButtonElement>('[data-honor-item]'));
+        const panel = cat.querySelector<HTMLElement>('[data-honor-panel]');
+        if (!panel) return;
+
+        const nameEl = panel.querySelector('[data-honor-name]');
+        const detailEl = panel.querySelector('[data-honor-detail]');
+        const placeEl = panel.querySelector('[data-honor-place]');
+        const indexEl = panel.querySelector('[data-honor-index]');
+
+        items.forEach((item) => {
+          item.addEventListener('click', () => {
+            items.forEach((other) => {
+              const active = other === item;
+              other.dataset.active = String(active);
+            });
+            item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+            [nameEl, detailEl, placeEl, indexEl].forEach((el) => {
+              if (el instanceof HTMLElement) {
+                el.style.transition = 'opacity 0.25s ease';
+                el.style.opacity = '0';
+              }
+            });
+
+            window.setTimeout(() => {
+              if (nameEl) nameEl.textContent = item.dataset.name ?? '';
+              if (detailEl) detailEl.textContent = item.dataset.detail ?? '';
+              if (indexEl) indexEl.textContent = item.dataset.index ?? '';
+              if (placeEl instanceof HTMLElement) {
+                const place = item.dataset.place ?? '';
+                placeEl.textContent = place;
+                placeEl.classList.toggle('hidden', !place);
+              }
+              [nameEl, detailEl, placeEl, indexEl].forEach((el) => {
+                if (el instanceof HTMLElement) el.style.opacity = '1';
+              });
+            }, 140);
+          });
+        });
+      });
+    }
+
+    // --- Embajadores por país ---
+    const embajadoresRoot = root.querySelector('[data-embajadores]');
+    if (embajadoresRoot) {
+      const catButtons = Array.from(
+        embajadoresRoot.querySelectorAll<HTMLButtonElement>('[data-embajador-cat]'),
+      );
+      const panel = embajadoresRoot.querySelector<HTMLElement>('[data-embajador-panel]');
+      const nameEl = embajadoresRoot.querySelector('[data-embajador-name]');
+      const detailEl = embajadoresRoot.querySelector('[data-embajador-detail]');
+      const placeEl = embajadoresRoot.querySelector('[data-embajador-place]');
+      const photoEl = embajadoresRoot.querySelector<HTMLImageElement>('[data-embajador-photo]');
+
+      function setEmbajadorFromButton(btn: HTMLButtonElement) {
+        catButtons.forEach((other) => {
+          const active = other === btn;
+          other.dataset.active = String(active);
+          other.setAttribute('aria-selected', String(active));
+          other.tabIndex = active ? 0 : -1;
+        });
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+
+        [nameEl, detailEl, placeEl, photoEl].forEach((el) => {
+          if (el instanceof HTMLElement) {
+            el.style.transition = 'opacity 0.25s ease';
+            el.style.opacity = '0';
+          }
+        });
+
+        window.setTimeout(() => {
+          if (nameEl) nameEl.textContent = btn.dataset.name ?? '';
+          if (detailEl) detailEl.textContent = btn.dataset.detail ?? '';
+          if (placeEl) placeEl.textContent = btn.dataset.place ?? '';
+          if (photoEl) {
+            photoEl.src = btn.dataset.photo ?? '';
+            photoEl.alt = btn.dataset.name ?? '';
+          }
+          if (panel) panel.setAttribute('aria-labelledby', btn.id);
+          [nameEl, detailEl, placeEl, photoEl].forEach((el) => {
+            if (el instanceof HTMLElement) el.style.opacity = '1';
+          });
+        }, 140);
+      }
+
+      catButtons.forEach((btn) => {
+        btn.addEventListener('click', () => setEmbajadorFromButton(btn));
+      });
+    }
   }
 </script>

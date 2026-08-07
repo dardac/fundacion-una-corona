@@ -4,7 +4,7 @@ export const HONORES = {
     {
       id: 'invitados',
       label: 'Invitados de Honor',
-      edition: 'Premio Humanitario Internacional Una Corona por la Vida',
+      edition: 'I Edición España 2026',
       description: 'Referentes del liderazgo, la excelencia y el impacto social global.',
       items: [
         {
@@ -42,7 +42,7 @@ export const HONORES = {
     {
       id: 'ong',
       label: 'Reconocimientos ONG',
-      edition: 'I Edición España',
+      edition: 'I Edición España 2026',
       description: 'Reconocimientos (placas) ONG',
       items: [
         {
@@ -174,16 +174,7 @@ export const HONORES = {
   ],
 } as const;
 
-/** Estructura lista para cuando llegue el contenido de embajadores */
-export const EMBAJADORES = {
-  categories: [] as Array<{
-    id: string;
-    label: string;
-    edition?: string;
-    description?: string;
-    items: Array<{ name: string; detail: string; place: string; photo?: string }>;
-  }>,
-};
+export { EMBAJADORES } from './embajadores';
 
 export const RECOGNITION_TABS = [
   { id: 'nominados', label: 'Nominados' },
