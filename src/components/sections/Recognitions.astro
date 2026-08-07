@@ -1,0 +1,248 @@
+---
+import { NOMINADOS, RECOGNITION_LINKS } from '../../data/nominados';
+
+const first = NOMINADOS.items[0];
+---
+
+<section id="reconocimientos" class="section-pad overflow-x-clip border-t border-gold/10">
+  <div class="section-wide min-w-0">
+    <div class="max-w-3xl">
+      <p
+        class="text-xs font-semibold tracking-[0.24em] text-gold uppercase"
+        data-reveal
+        data-reveal-line
+      >
+        Reconocimientos
+      </p>
+      <h2 class="mt-4 text-balance text-3xl sm:text-4xl" data-reveal data-reveal-delay="80">
+        Premio Humanitario Una Corona por la Vida
+      </h2>
+    </div>
+
+    <nav
+      class="mt-8 flex flex-wrap gap-2 border-y border-gold/15 py-4"
+      aria-label="Subsecciones de reconocimientos"
+      data-reveal
+      data-reveal-delay="120"
+    >
+      {
+        RECOGNITION_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class="rounded-md border border-gold/25 px-4 py-2 text-sm text-gold-bright no-underline transition hover:border-gold hover:bg-gold/10"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Nominados -->
+    <div id="nominados" class="mt-14 scroll-mt-28" data-nominados>
+      <div class="max-w-3xl" data-reveal>
+        <p class="text-xs font-semibold tracking-[0.24em] text-gold uppercase">
+          {NOMINADOS.edition}
+        </p>
+        <h3 class="mt-4 text-2xl text-gold-bright sm:text-3xl">
+          {NOMINADOS.title}
+        </h3>
+        <p class="mt-2 font-display text-base text-cream/90 sm:text-lg">
+          {NOMINADOS.subtitle}
+        </p>
+      </div>
+
+      <div
+        class="mt-10 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-stretch lg:gap-12"
+      >
+        <div class="relative min-h-0 border border-gold/20 bg-void/40 lg:h-0 lg:min-h-full">
+          <div
+            class="nominados-scroll max-h-[22rem] divide-y divide-gold/15 overflow-y-auto overscroll-contain lg:absolute lg:inset-0 lg:max-h-none"
+            role="tablist"
+            aria-label="Nominados"
+            data-nominado-list
+            data-reveal
+          >
+            {
+              NOMINADOS.items.map((item, index) => (
+                <button
+                  type="button"
+                  id={`nominado-tab-${index}`}
+                  role="tab"
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                  aria-controls="nominado-panel"
+                  tabindex={index === 0 ? 0 : -1}
+                  class="group flex w-full items-center gap-4 px-4 py-4 text-left transition hover:bg-gold/5 data-[active=true]:border-l-2 data-[active=true]:border-l-gold data-[active=true]:bg-gold/10 sm:gap-5 sm:px-5"
+                  data-nominado-tab
+                  data-name={item.name}
+                  data-role={item.role}
+                  data-place={item.place}
+                  data-index={String(index + 1).padStart(2, '0')}
+                  data-active={index === 0 ? 'true' : 'false'}
+                >
+                  <span class="font-display text-sm tracking-[0.14em] text-gold transition group-data-[active=true]:text-gold-bright">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span class="min-w-0 flex-1">
+                    <span class="block text-sm text-cream transition group-data-[active=true]:text-gold-bright sm:text-base">
+                      {item.name}
+                    </span>
+                    <span class="mt-0.5 block text-xs text-muted sm:hidden">{item.place}</span>
+                  </span>
+                  <span
+                    class="hidden text-xs tracking-wide text-muted uppercase sm:inline"
+                    aria-hidden="true"
+                  >
+                    {item.place}
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div
+          id="nominado-panel"
+          role="tabpanel"
+          aria-labelledby="nominado-tab-0"
+          class="border border-gold/20 bg-ink/50 p-6 sm:p-8"
+          data-reveal
+          data-reveal-delay="100"
+        >
+          <p
+            class="font-display text-4xl tracking-[0.12em] text-gold/40 sm:text-5xl"
+            data-nominado-index
+          >
+            {String(1).padStart(2, '0')}
+          </p>
+          <h4 class="mt-4 text-2xl text-gold-bright sm:text-3xl" data-nominado-name>
+            {first.name}
+          </h4>
+          <p
+            class="mt-2 text-xs font-semibold tracking-[0.18em] text-gold uppercase"
+            data-nominado-place
+          >
+            {first.place}
+          </p>
+          <p class="mt-6 text-base text-muted sm:text-lg" data-nominado-role>
+            {first.role}
+          </p>
+          <p class="mt-8 border-t border-gold/15 pt-6 text-sm text-cream/90">
+            {NOMINADOS.note}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Honores (contenido pendiente) -->
+    <div id="honores" class="mt-20 scroll-mt-28 border-t border-gold/15 pt-12">
+      <div class="max-w-3xl" data-reveal>
+        <p class="text-xs font-semibold tracking-[0.24em] text-gold uppercase">Honores</p>
+        <h3 class="mt-4 text-2xl text-gold-bright sm:text-3xl">Honores</h3>
+      </div>
+    </div>
+
+    <!-- Embajadores (contenido pendiente) -->
+    <div id="embajadores" class="mt-20 scroll-mt-28 border-t border-gold/15 pt-12">
+      <div class="max-w-3xl" data-reveal>
+        <p class="text-xs font-semibold tracking-[0.24em] text-gold uppercase">
+          Embajadores internacionales
+        </p>
+        <h3 class="mt-4 text-2xl text-gold-bright sm:text-3xl">
+          Embajadores internacionales
+        </h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nominados-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--color-gold) 55%, transparent) transparent;
+  }
+
+  .nominados-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .nominados-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .nominados-scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-gold) 45%, transparent);
+  }
+</style>
+
+<script>
+  const root = document.querySelector('[data-nominados]');
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-nominado-tab]'));
+    const panel = document.getElementById('nominado-panel');
+    const nameEl = root.querySelector('[data-nominado-name]');
+    const roleEl = root.querySelector('[data-nominado-role]');
+    const placeEl = root.querySelector('[data-nominado-place]');
+    const indexEl = root.querySelector('[data-nominado-index]');
+
+    function setActive(tab: HTMLButtonElement) {
+      tabs.forEach((other) => {
+        const active = other === tab;
+        other.dataset.active = String(active);
+        other.setAttribute('aria-selected', String(active));
+        other.tabIndex = active ? 0 : -1;
+      });
+
+      tab.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+      const nextName = tab.dataset.name ?? '';
+      const nextRole = tab.dataset.role ?? '';
+      const nextPlace = tab.dataset.place ?? '';
+      const nextIndex = tab.dataset.index ?? '';
+
+      [nameEl, roleEl, placeEl, indexEl].forEach((el) => {
+        if (!(el instanceof HTMLElement)) return;
+        el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(0.35rem)';
+      });
+
+      window.setTimeout(() => {
+        if (nameEl) nameEl.textContent = nextName;
+        if (roleEl) roleEl.textContent = nextRole;
+        if (placeEl) placeEl.textContent = nextPlace;
+        if (indexEl) indexEl.textContent = nextIndex;
+        if (panel) panel.setAttribute('aria-labelledby', tab.id);
+
+        [nameEl, roleEl, placeEl, indexEl].forEach((el) => {
+          if (!(el instanceof HTMLElement)) return;
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      }, 150);
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => setActive(tab));
+    });
+
+    root.addEventListener('keydown', (event) => {
+      if (!(event instanceof KeyboardEvent)) return;
+      const current = tabs.findIndex((tab) => tab.dataset.active === 'true');
+      if (current < 0) return;
+
+      let next = current;
+      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = (current + 1) % tabs.length;
+      if (event.key === 'ArrowUp' || event.key === 'ArrowLeft')
+        next = (current - 1 + tabs.length) % tabs.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = tabs.length - 1;
+
+      if (next !== current) {
+        event.preventDefault();
+        tabs[next]?.focus();
+        setActive(tabs[next]!);
+      }
+    });
+  }
+</script>
