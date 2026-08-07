@@ -2,7 +2,6 @@ export const NOMINADOS = {
   edition: 'I Edición España 2026',
   title: 'Listado de los 12 nominados',
   subtitle: 'Premio Humanitario Una Corona por la Vida',
-  note: 'Se entregan exclusivamente de forma presencial.',
   items: [
     {
       name: 'Yasmin Velasco',

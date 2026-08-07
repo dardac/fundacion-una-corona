@@ -136,7 +136,6 @@ const firstEmbajador = firstEmbajadorCat.items[0];
           <p class="mt-3 text-sm text-muted" data-nominado-role>
             {firstNominado.role}
           </p>
-          <p class="mt-4 border-t border-gold/15 pt-3 text-xs text-cream/90">{NOMINADOS.note}</p>
         </div>
       </div>
     </div>
@@ -289,7 +288,6 @@ const firstEmbajador = firstEmbajadorCat.items[0];
                 <p class="mt-3 text-sm text-muted" data-honor-detail>
                   {cat.items[0].detail}
                 </p>
-                <p class="mt-4 border-t border-gold/15 pt-3 text-xs text-cream/90">{HONORES.note}</p>
               </div>
             </div>
           </div>
@@ -544,7 +542,13 @@ const firstEmbajador = firstEmbajadorCat.items[0];
           btn.tabIndex = active ? 0 : -1;
           if (active) {
             activeIndex = index;
-            btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+            const honorScroller = honoresRoot.querySelector<HTMLElement>(
+              '[data-honor-cat-scroller]',
+            );
+            if (honorScroller) {
+              const left = btn.offsetLeft - (honorScroller.clientWidth - btn.offsetWidth) / 2;
+              honorScroller.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+            }
           }
         });
         categories.forEach((cat) => {

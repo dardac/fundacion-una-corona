@@ -1,5 +1,4 @@
 export const HONORES = {
-  note: 'Premio Humanitario Una Corona por la Vida: se entregan exclusivamente de forma presencial, sin excepción.',
   categories: [
     {
       id: 'invitados',
