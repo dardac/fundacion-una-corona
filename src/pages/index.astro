@@ -16,9 +16,11 @@ import Contact from '../components/sections/Contact.astro';
 <BaseLayout>
   <Header slot="header" />
   <Hero />
-  <About />
-  <MissionVision />
-  <Purpose />
+  <section id="quienes-somos" class="scroll-mt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
+    <About />
+    <MissionVision />
+    <Purpose />
+  </section>
   <Ethics />
   <Members />
   <Recognitions />

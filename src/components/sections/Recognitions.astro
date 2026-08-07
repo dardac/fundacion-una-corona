@@ -10,7 +10,10 @@ const firstEmbajadorCat = EMBAJADORES.categories[0];
 const firstEmbajador = firstEmbajadorCat.items[0];
 ---
 
-<section id="reconocimientos" class="section-pad overflow-x-clip border-t border-gold/10">
+<section
+  id="reconocimientos"
+  class="section-pad scroll-mt-[calc(4.25rem+env(safe-area-inset-top,0px))] overflow-x-clip border-t border-gold/10"
+>
   <div class="section-wide min-w-0" data-recognitions>
     <div class="max-w-3xl">
       <p
@@ -40,7 +43,7 @@ const firstEmbajador = firstEmbajadorCat.items[0];
             role="tab"
             id={`recog-tab-${tab.id}`}
             aria-selected={index === 0 ? 'true' : 'false'}
-            aria-controls={`recog-panel-${tab.id}`}
+            aria-controls={tab.id}
             tabindex={index === 0 ? 0 : -1}
             class="rounded-md border border-gold/25 px-3 py-1.5 text-sm text-gold-bright transition hover:border-gold hover:bg-gold/10 data-[active=true]:border-gold data-[active=true]:bg-gold/15"
             data-recog-tab
@@ -55,10 +58,10 @@ const firstEmbajador = firstEmbajadorCat.items[0];
 
     <!-- Panel Nominados -->
     <div
-      id="recog-panel-nominados"
+      id="nominados"
       role="tabpanel"
       aria-labelledby="recog-tab-nominados"
-      class="mt-8"
+      class="mt-8 scroll-mt-[calc(4.25rem+env(safe-area-inset-top,0px))]"
       data-recog-panel
       data-panel="nominados"
       data-nominados
@@ -140,10 +143,10 @@ const firstEmbajador = firstEmbajadorCat.items[0];
 
     <!-- Panel Honores -->
     <div
-      id="recog-panel-honores"
+      id="honores"
       role="tabpanel"
       aria-labelledby="recog-tab-honores"
-      class="mt-8 hidden"
+      class="mt-8 scroll-mt-[calc(4.25rem+env(safe-area-inset-top,0px))] hidden"
       hidden
       data-recog-panel
       data-panel="honores"
@@ -296,10 +299,10 @@ const firstEmbajador = firstEmbajadorCat.items[0];
 
     <!-- Panel Embajadores -->
     <div
-      id="recog-panel-embajadores"
+      id="embajadores"
       role="tabpanel"
       aria-labelledby="recog-tab-embajadores"
-      class="mt-8 hidden"
+      class="mt-8 scroll-mt-[calc(4.25rem+env(safe-area-inset-top,0px))] hidden"
       hidden
       data-recog-panel
       data-panel="embajadores"
@@ -433,8 +436,44 @@ const firstEmbajador = firstEmbajadorCat.items[0];
       });
     }
 
+    const recogPanelIds = new Set(
+      mainPanels
+        .map((panel) => panel.dataset.panel)
+        .filter((id): id is string => Boolean(id)),
+    );
+
+    function applyHashPanel(options?: { scroll?: boolean }) {
+      const hash = window.location.hash.replace(/^#/, '');
+      if (!hash || !recogPanelIds.has(hash)) return false;
+      showMainPanel(hash);
+      if (options?.scroll !== false) {
+        window.requestAnimationFrame(() => {
+          document.getElementById('reconocimientos')?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        });
+      }
+      return true;
+    }
+
     mainTabs.forEach((tab) => {
-      tab.addEventListener('click', () => showMainPanel(tab.dataset.panel ?? 'nominados'));
+      tab.addEventListener('click', () => {
+        const id = tab.dataset.panel ?? 'nominados';
+        showMainPanel(id);
+        const url = new URL(window.location.href);
+        url.hash = id;
+        history.replaceState(null, '', url);
+      });
+    });
+
+    const initialHash = window.location.hash.replace(/^#/, '');
+    if (recogPanelIds.has(initialHash)) {
+      applyHashPanel({ scroll: true });
+    }
+
+    window.addEventListener('hashchange', () => {
+      applyHashPanel({ scroll: true });
     });
 
     // --- Nominados ---

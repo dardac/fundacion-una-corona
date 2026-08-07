@@ -2,7 +2,7 @@
 import { SITE } from '../../consts';
 ---
 
-<section id="quienes-somos" class="section-pad border-t border-gold/10">
+<section class="section-pad border-t border-gold/10" aria-labelledby="quienes-somos-heading">
   <div class="section-narrow">
     <p
       class="text-xs font-semibold tracking-[0.24em] text-gold uppercase"
@@ -11,7 +11,12 @@ import { SITE } from '../../consts';
     >
       Quiénes somos
     </p>
-    <h2 class="mt-4 text-3xl sm:text-4xl" data-reveal data-reveal-delay="80">
+    <h2
+      id="quienes-somos-heading"
+      class="mt-4 text-3xl sm:text-4xl"
+      data-reveal
+      data-reveal-delay="80"
+    >
       {SITE.acronym}
     </h2>
     <p

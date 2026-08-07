@@ -1,12 +1,32 @@
 ---
 import { SITE, whatsappHref } from '../consts';
 
-const links = [
-  { href: '#quienes-somos', label: 'Quiénes somos' },
-  { href: '#mision', label: 'Misión' },
-  { href: '#pilares', label: 'Pilares' },
+type NavChild = { href: string; label: string };
+type NavItem = {
+  href: string;
+  label: string;
+  children?: NavChild[];
+};
+
+const links: NavItem[] = [
+  {
+    href: '#quienes-somos',
+    label: 'Quiénes somos',
+    children: [
+      { href: '#mision', label: 'Misión' },
+      { href: '#pilares', label: 'Pilares' },
+    ],
+  },
   { href: '#miembros', label: 'Miembros' },
-  { href: '#reconocimientos', label: 'Reconocimientos' },
+  {
+    href: '#reconocimientos',
+    label: 'Reconocimientos',
+    children: [
+      { href: '#nominados', label: 'Nominados' },
+      { href: '#honores', label: 'Honores' },
+      { href: '#embajadores', label: 'Embajadores' },
+    ],
+  },
   { href: '#donar', label: 'Donar' },
   { href: '#contacto', label: 'Contacto' },
 ];
@@ -33,16 +53,59 @@ const links = [
       <span class="sr-only">{SITE.acronym} — {SITE.campaign}</span>
     </a>
 
-    <nav class="hidden items-center gap-6 lg:flex" aria-label="Principal">
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Principal">
       {
-        links.map((link) => (
-          <a
-            href={link.href}
-            class="text-sm text-muted no-underline hover:text-gold-bright"
-          >
-            {link.label}
-          </a>
-        ))
+        links.map((link) =>
+          link.children ? (
+            <div class="group relative">
+              <a
+                href={link.href}
+                class="inline-flex items-center gap-1 px-2 py-2 text-sm text-muted no-underline hover:text-gold-bright"
+                aria-haspopup="true"
+              >
+                {link.label}
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  class="opacity-70 transition group-hover:rotate-180 group-focus-within:rotate-180"
+                >
+                  <path
+                    d="M6 9l6 6 6-6"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </a>
+              <div
+                class="invisible absolute top-full left-0 z-50 min-w-[12rem] translate-y-1 border border-gold/20 bg-ink/98 py-2 opacity-0 shadow-[0_12px_40px_rgba(0,0,0,0.45)] transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
+                role="menu"
+                aria-label={link.label}
+              >
+                {link.children.map((child) => (
+                  <a
+                    href={child.href}
+                    role="menuitem"
+                    class="block px-4 py-2 text-sm text-muted no-underline hover:bg-gold/10 hover:text-gold-bright"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={link.href}
+              class="px-2 py-2 text-sm text-muted no-underline hover:text-gold-bright"
+            >
+              {link.label}
+            </a>
+          ),
+        )
       }
     </nav>
 
@@ -76,24 +139,51 @@ const links = [
     </div>
   </div>
 
-  <div id="menu-movil" class="hidden border-t border-gold/15 bg-ink px-6 py-4 lg:hidden" hidden>
-    <nav class="flex flex-col gap-3" aria-label="Móvil">
+  <div
+    id="menu-movil"
+    class="hidden border-t border-gold/15 bg-void/95 px-6 py-4 backdrop-blur-xl lg:hidden"
+    hidden
+  >
+    <nav class="flex flex-col gap-1" aria-label="Móvil">
       {
-        links.map((link) => (
-          <a
-            href={link.href}
-            class="py-1 text-base text-cream no-underline hover:text-gold-bright"
-            data-menu-link
-          >
-            {link.label}
-          </a>
-        ))
+        links.map((link) =>
+          link.children ? (
+            <div class="border-b border-gold/10 py-2 last:border-b-0">
+              <a
+                href={link.href}
+                class="block py-1 text-base text-cream no-underline hover:text-gold-bright"
+                data-menu-link
+              >
+                {link.label}
+              </a>
+              <div class="mt-1 ml-3 flex flex-col border-l border-gold/20 pl-3">
+                {link.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class="py-1.5 text-sm text-muted no-underline hover:text-gold-bright"
+                    data-menu-link
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={link.href}
+              class="border-b border-gold/10 py-2 text-base text-cream no-underline last:border-b-0 hover:text-gold-bright"
+              data-menu-link
+            >
+              {link.label}
+            </a>
+          ),
+        )
       }
       <a
         href={whatsappHref()}
         target="_blank"
         rel="noopener noreferrer"
-        class="py-1 text-base text-gold-bright no-underline"
+        class="py-2 text-base text-gold-bright no-underline"
         data-menu-link
       >
         Escribir por WhatsApp
@@ -101,6 +191,14 @@ const links = [
     </nav>
   </div>
 </header>
+
+<div
+  data-menu-backdrop
+  class="fixed inset-0 z-30 hidden bg-void/70 backdrop-blur-md lg:hidden"
+  hidden
+  aria-hidden="true"
+></div>
+
 <div
   class="w-full shrink-0"
   style="height: calc(4.25rem + env(safe-area-inset-top, 0px));"
@@ -111,6 +209,7 @@ const links = [
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');
   const menu = document.getElementById('menu-movil');
+  const backdrop = document.querySelector<HTMLElement>('[data-menu-backdrop]');
   const links = document.querySelectorAll('[data-menu-link]');
 
   function setOpen(open: boolean) {
@@ -118,12 +217,19 @@ const links = [
     toggle.setAttribute('aria-expanded', String(open));
     menu.hidden = !open;
     menu.classList.toggle('hidden', !open);
+    if (backdrop) {
+      backdrop.hidden = !open;
+      backdrop.classList.toggle('hidden', !open);
+    }
+    document.body.classList.toggle('overflow-hidden', open);
   }
 
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
     setOpen(open);
   });
+
+  backdrop?.addEventListener('click', () => setOpen(false));
 
   links.forEach((link) => {
     link.addEventListener('click', () => setOpen(false));
