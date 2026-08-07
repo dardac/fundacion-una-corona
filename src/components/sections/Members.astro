@@ -34,16 +34,17 @@ const first = MEMBERS[0];
       class="mt-10 grid min-w-0 items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14"
       data-members
     >
-      <div class="relative mx-auto w-full max-w-md min-w-0 lg:mx-0" data-reveal="scale">
+      <div class="relative mx-auto w-full max-w-md min-w-0 lg:mx-0" data-reveal="fade">
         <div class="overflow-hidden border border-gold/20 bg-void">
           <img
             src={first.photo}
             alt={first.name}
             width="720"
             height="900"
-            class="aspect-[4/5] h-auto w-full max-w-full object-cover object-top transition-opacity duration-500"
+            class="aspect-[4/5] h-auto w-full max-w-full object-cover object-top"
             data-member-photo
             decoding="async"
+            fetchpriority="low"
           />
         </div>
       </div>
@@ -110,11 +111,11 @@ const first = MEMBERS[0];
                     data-active={index === 0 ? 'true' : 'false'}
                   >
                     <img
-                      src={member.photo}
+                      src={member.photoThumb}
                       alt=""
                       width="80"
                       height="80"
-                      class="h-full w-full object-cover object-top opacity-55 transition duration-300 group-hover:opacity-90 group-data-[active=true]:opacity-100"
+                      class="h-full w-full object-cover object-top opacity-55 transition-opacity duration-300 group-hover:opacity-90 group-data-[active=true]:opacity-100"
                       loading="lazy"
                       decoding="async"
                     />
@@ -156,6 +157,8 @@ const first = MEMBERS[0];
 </section>
 
 <script>
+  import { prefetchImages, swapImageSrc } from '../../scripts/media';
+
   const root = document.querySelector('[data-members]');
 
   if (root) {
@@ -168,6 +171,9 @@ const first = MEMBERS[0];
     const nextBtn = root.querySelector<HTMLButtonElement>('[data-member-next]');
     const scroller = root.querySelector<HTMLElement>('[data-member-scroller]');
     const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-member-tab]'));
+    let swapToken = 0;
+
+    prefetchImages(tabs.map((tab) => tab.dataset.photo ?? ''));
 
     function updateArrowState(index: number) {
       if (prevBtn) prevBtn.disabled = index <= 0;
@@ -194,41 +200,40 @@ const first = MEMBERS[0];
       const nextBio = tab.dataset.bio ?? '';
       const nextPhoto = tab.dataset.photo ?? '';
       const activeIndex = tabs.indexOf(tab);
+      const token = ++swapToken;
       updateArrowState(activeIndex);
       scrollTabIntoScroller(tab);
 
-      const fade = (el: Element | null) => {
+      const fadeText = (el: Element | null) => {
         if (!(el instanceof HTMLElement)) return;
+        el.style.transition = 'opacity 0.2s ease';
         el.style.opacity = '0';
         window.setTimeout(() => {
+          if (token !== swapToken) return;
           el.style.opacity = '1';
-        }, 180);
+        }, 160);
       };
 
-      [nameEl, roleEl, bioEl, photo].forEach((el) => {
-        if (el instanceof HTMLElement) {
-          el.style.transition = 'opacity 0.28s ease';
-        }
-      });
-
-      fade(nameEl);
-      fade(roleEl);
-      fade(bioEl);
-      fade(photo);
+      fadeText(nameEl);
+      fadeText(roleEl);
+      fadeText(bioEl);
 
       window.setTimeout(() => {
+        if (token !== swapToken) return;
         if (nameEl) nameEl.textContent = nextName;
         if (roleEl) roleEl.textContent = nextRole;
         if (bioEl) bioEl.textContent = nextBio;
-        if (photo) {
-          photo.src = nextPhoto;
-          photo.alt = nextName;
-        }
         if (panel) {
           panel.setAttribute('aria-labelledby', tab.id);
           panel.textContent = nextName;
         }
-      }, 160);
+      }, 140);
+
+      if (photo && nextPhoto) {
+        void swapImageSrc(photo, nextPhoto, nextName).then(() => {
+          if (token !== swapToken) return;
+        });
+      }
     }
 
     function move(delta: number) {

@@ -364,7 +364,7 @@ const firstEmbajador = firstEmbajadorCat.items[0];
           data-embajador-panel
         >
           <div class="grid items-center gap-5 sm:grid-cols-[9rem_1fr] sm:gap-6 lg:grid-cols-[11rem_1fr]">
-            <div class="mx-auto aspect-[4/5] w-28 overflow-hidden border border-gold/20 sm:mx-0 sm:w-full">
+            <div class="mx-auto aspect-[4/5] w-28 overflow-hidden border border-gold/20 bg-void sm:mx-0 sm:w-full">
               <img
                 src={firstEmbajador.photo}
                 alt={firstEmbajador.name}
@@ -414,6 +414,8 @@ const firstEmbajador = firstEmbajadorCat.items[0];
 </style>
 
 <script>
+  import { prefetchImages, swapImageSrc } from '../../scripts/media';
+
   const root = document.querySelector('[data-recognitions]');
   if (!root) {
     // no-op
@@ -630,11 +632,17 @@ const firstEmbajador = firstEmbajadorCat.items[0];
           other.setAttribute('aria-selected', String(active));
           other.tabIndex = active ? 0 : -1;
         });
-        btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        const embajadorScroller = embajadoresRoot.querySelector<HTMLElement>(
+          '[data-embajador-cat-scroller]',
+        );
+        if (embajadorScroller && window.matchMedia('(max-width: 1023px)').matches) {
+          const left = btn.offsetLeft - (embajadorScroller.clientWidth - btn.offsetWidth) / 2;
+          embajadorScroller.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+        }
 
-        [nameEl, detailEl, placeEl, photoEl].forEach((el) => {
+        [nameEl, detailEl, placeEl].forEach((el) => {
           if (el instanceof HTMLElement) {
-            el.style.transition = 'opacity 0.25s ease';
+            el.style.transition = 'opacity 0.2s ease';
             el.style.opacity = '0';
           }
         });
@@ -643,20 +651,23 @@ const firstEmbajador = firstEmbajadorCat.items[0];
           if (nameEl) nameEl.textContent = btn.dataset.name ?? '';
           if (detailEl) detailEl.textContent = btn.dataset.detail ?? '';
           if (placeEl) placeEl.textContent = btn.dataset.place ?? '';
-          if (photoEl) {
-            photoEl.src = btn.dataset.photo ?? '';
-            photoEl.alt = btn.dataset.name ?? '';
-          }
           if (panel) panel.setAttribute('aria-labelledby', btn.id);
-          [nameEl, detailEl, placeEl, photoEl].forEach((el) => {
+          [nameEl, detailEl, placeEl].forEach((el) => {
             if (el instanceof HTMLElement) el.style.opacity = '1';
           });
         }, 140);
+
+        const nextPhoto = btn.dataset.photo ?? '';
+        if (photoEl && nextPhoto) {
+          void swapImageSrc(photoEl, nextPhoto, btn.dataset.name ?? '');
+        }
       }
 
       catButtons.forEach((btn) => {
         btn.addEventListener('click', () => setEmbajadorFromButton(btn));
       });
+
+      prefetchImages(catButtons.map((btn) => btn.dataset.photo ?? ''));
     }
   }
 </script>
