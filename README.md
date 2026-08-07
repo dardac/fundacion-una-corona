@@ -32,4 +32,4 @@ En `src/consts.ts` puedes actualizar:
 
 1. Conecta el repo en [vercel.com](https://vercel.com)
 2. Framework: Astro (detectado automáticamente)
-3. Build: `npm run build` · Output: `dist`
+3. Build: `npm run build` · Output: `dist` 
