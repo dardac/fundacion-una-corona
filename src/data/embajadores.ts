@@ -61,5 +61,17 @@ export const EMBAJADORES = {
         },
       ],
     },
+    {
+      id: 'venezuela',
+      label: 'Venezuela',
+      items: [
+        {
+          name: 'Darda Castillo',
+          detail: 'Desarrolladora Web y Mobile Full-stack',
+          place: 'Venezuela',
+          photo: '/embajadores/darda.webp',
+        },
+      ],
+    },
   ],
 } as const;

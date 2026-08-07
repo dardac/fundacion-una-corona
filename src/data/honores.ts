@@ -59,11 +59,6 @@ export const HONORES = {
           detail: 'Reconocimiento institucional',
           place: 'Argentina',
         },
-        {
-          name: 'ONG Animals are Human Too',
-          detail: 'Reconocimiento institucional',
-          place: 'Trinidad y Tobago',
-        },
       ],
     },
     {

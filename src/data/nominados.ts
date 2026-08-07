@@ -9,7 +9,7 @@ export const NOMINADOS = {
       place: 'Venezuela–Colombia',
     },
     {
-      name: 'Claudio Pompilio',
+      name: 'Claudio Pombilio',
       role: 'Director-Editor Internacional, SUROESTE International Magazine',
       place: 'Italia',
     },

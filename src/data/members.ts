@@ -49,7 +49,7 @@ export const MEMBERS = [
   },
   {
     id: 'claudio',
-    name: 'Doctor HC Claudio Emilio Pompilio Quevedo',
+    name: 'Doctor HC Claudio Emilio Pombilio Quevedo',
     role: 'Relaciones Públicas',
     photo: '/miembros/claudio.webp',
     photoThumb: '/miembros/claudio-sm.webp',
