@@ -57,7 +57,7 @@ export const EMBAJADORES = {
           name: 'Antonio Ovalle',
           detail: 'Licenciado e investigador en energías renovables',
           place: 'Colombia',
-          photo: '/embajadores/antonio.webp',
+          photo: '/embajadores/antonio2.webp',
         },
       ],
     },
