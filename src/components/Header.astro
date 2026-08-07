@@ -5,13 +5,14 @@ const links = [
   { href: '#quienes-somos', label: 'Quiénes somos' },
   { href: '#mision', label: 'Misión' },
   { href: '#pilares', label: 'Pilares' },
+  { href: '#miembros', label: 'Miembros' },
   { href: '#donar', label: 'Donar' },
   { href: '#contacto', label: 'Contacto' },
 ];
 ---
 
 <header
-  class="sticky top-0 z-40 border-b border-gold/15 bg-void/85 backdrop-blur-md"
+  class="fixed inset-x-0 top-0 z-40 border-b border-gold/15 bg-void/90 pt-[env(safe-area-inset-top)] backdrop-blur-md"
 >
   <div class="section-wide flex items-center justify-between gap-4 px-6 py-3 sm:px-8 lg:px-10">
     <a href="#inicio" class="group flex items-center gap-3 no-underline">
@@ -99,6 +100,12 @@ const links = [
     </nav>
   </div>
 </header>
+<div
+  class="w-full shrink-0"
+  style="height: calc(4.25rem + env(safe-area-inset-top, 0px));"
+  aria-hidden="true"
+>
+</div>
 
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');

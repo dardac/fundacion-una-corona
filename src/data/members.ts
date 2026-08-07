@@ -1,0 +1,58 @@
+export const MEMBERS = [
+  {
+    id: 'marilanda',
+    name: 'Marilanda Sánchez',
+    role: 'Presidenta',
+    photo: '/miembros/marilanda.jpeg',
+    bio: 'Presidenta de la Fundación Internacional Ayuda Humanitaria, de la Organización Bandera Internacional y del premio Una Corona por la Vida. Es la guía institucional y el alma de esta causa que lleva más de 20 años transformando realidades.',
+  },
+  {
+    id: 'sabrina',
+    name: 'Sabrina Padrón',
+    role: 'Directora Ejecutiva & Productora General',
+    photo: '/miembros/sabrina.jpeg',
+    bio: 'La fuerza visionaria, creativa y de medios detrás de la gala. Abogada y estudiante de Comunicación Social, aporta un rigor analítico y una impecable perspectiva estratégica a la producción audiovisual. Es la responsable absoluta de diseñar la identidad global de la marca, tejer la red internacional de prensa y coordinar la majestuosa puesta en escena que une continentes.',
+  },
+  {
+    id: 'aaron',
+    name: 'Aarón Campos',
+    role: 'Productor Ejecutivo & Director de Contenido Audiovisual',
+    photo: '/miembros/aaron.jpeg',
+    bio: 'Destacado cineasta encargado de la dirección, realización y producción ejecutiva de todas las piezas y contenidos en video de la gala. Su mirada cinematográfica y experiencia narrativa son los pilares fundamentales que capturan la esencia del proyecto, elevando la estética visual y el registro documental del evento a los más altos estándares artísticos internacionales.',
+  },
+  {
+    id: 'jhon',
+    name: 'Jhon Semeco',
+    role: 'Respaldo Institucional y Miembro de la Organización',
+    photo: '/miembros/jhon.jpeg',
+    bio: 'Una incorporación cumbre que eleva el galardón a las más altas esferas de la industria. Su brillante trayectoria como miembro de la Academia de los Latin Grammy, miembro de la Academia de la Música de España y Patrimonio Nacional Cultural de Venezuela, consolida la proyección estratégica, la estructura de medios y el prestigio global del proyecto.',
+  },
+  {
+    id: 'nahomi',
+    name: 'Nahomi Cabrera',
+    role: 'NahCab Studio',
+    photo: '/miembros/nahomi.jpeg',
+    bio: 'Diseñadora gráfica y estratega de marca basada en New Jersey, USA, y fundadora de NahCab Studio. Se especializa en branding, identidad visual y diseño para redes sociales, trabajando con emprendedoras y negocios pequeños que quieren una marca que los represente de verdad. No solo algo que se vea bien, sino algo que se sienta bien y conecte con las personas correctas.',
+  },
+  {
+    id: 'karla',
+    name: 'Doctora Karla Henríquez',
+    role: 'Defensora de Derechos Humanos',
+    photo: '/miembros/karla.jpeg',
+    bio: 'Abogada en derecho internacional, violencia digital y especialista en migración y protección internacional. Trabaja en la defensa de personas migrantes, refugiadas y poblaciones altamente vulnerables, incluyendo víctimas de trata, tráfico humano y desplazamiento forzado, promoviendo justicia, dignidad humana y acceso a derechos fundamentales.',
+  },
+  {
+    id: 'claudio',
+    name: 'Doctor HC Claudio Emilio Pompilio Quevedo',
+    role: 'Relaciones Públicas',
+    photo: '/miembros/claudio.jpeg',
+    bio: 'Doctor HC en filosofía, comunicador y escritor. Estratega de comunicación y RRPP de la gala, liderando las alianzas de prensa y la proyección mediática en concordancia oficial con la prestigiosa Revista SUROESTE.',
+  },
+  {
+    id: 'eliezer',
+    name: 'Eliezer Sequera',
+    role: 'Escultor Oficial',
+    photo: '/miembros/eliezer.jpeg',
+    bio: 'El maestro encargado de materializar el propósito humanitario de la organización. Su obra, moldeada con una sensibilidad exquisita, convierte cada estatuilla en una pieza de arte eterno: una armadura de resiliencia y una corona de esperanza que se lleva en el alma. Con su visión, viste de gala el mérito de quienes cambian el mundo.',
+  },
+] as const;

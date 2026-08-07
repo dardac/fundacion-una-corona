@@ -97,7 +97,7 @@
   }
 
   .section-wide {
-    @apply mx-auto w-full max-w-6xl;
+    @apply mx-auto w-full min-w-0 max-w-6xl;
   }
 
   .reveal {
@@ -179,7 +179,7 @@
 
   .scroll-progress {
     position: fixed;
-    top: 0;
+    top: env(safe-area-inset-top, 0px);
     left: 0;
     z-index: 60;
     height: 2px;
