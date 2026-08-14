@@ -1,5 +1,5 @@
 ---
-import { SITE, whatsappHref } from '../consts';
+import { SITE } from '../consts';
 
 type NavChild = { href: string; label: string };
 type NavItem = {
@@ -10,33 +10,34 @@ type NavItem = {
 
 const links: NavItem[] = [
   {
-    href: '#quienes-somos',
+    href: '/#quienes-somos',
     label: 'Quiénes somos',
     children: [
-      { href: '#mision', label: 'Misión' },
-      { href: '#pilares', label: 'Pilares' },
+      { href: '/#mision', label: 'Misión' },
+      { href: '/#pilares', label: 'Pilares' },
+      { href: '/#miembros', label: 'Miembros' },
     ],
   },
-  { href: '#miembros', label: 'Miembros' },
   {
-    href: '#reconocimientos',
+    href: '/#reconocimientos',
     label: 'Reconocimientos',
     children: [
-      { href: '#nominados', label: 'Nominados' },
-      { href: '#honores', label: 'Honores' },
-      { href: '#embajadores', label: 'Embajadores' },
+      { href: '/#nominados', label: 'Nominados' },
+      { href: '/#honores', label: 'Honores' },
+      { href: '/#embajadores', label: 'Embajadores' },
     ],
   },
-  { href: '#donar', label: 'Donar' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/imagen-espana-2026', label: 'Imagen España 2026' },
+  { href: '/#donar', label: 'Donar' },
+  { href: '/#contacto', label: 'Contacto' },
 ];
 ---
 
 <header
   class="fixed inset-x-0 top-0 z-40 border-b border-gold/15 bg-void/90 pt-[env(safe-area-inset-top)] backdrop-blur-md"
 >
-  <div class="section-wide flex items-center justify-between gap-4 px-6 py-3 sm:px-8 lg:px-10">
-    <a href="#inicio" class="group flex items-center gap-3 no-underline">
+  <div class="section-wide flex items-center justify-between gap-3 px-5 py-3 sm:gap-4 sm:px-8 lg:px-10">
+    <a href="/" class="group flex shrink-0 items-center gap-3 no-underline">
       <img
         src="/images/logo-emblem.webp"
         alt=""
@@ -54,7 +55,7 @@ const links: NavItem[] = [
       <span class="sr-only">{SITE.acronym} — {SITE.campaign}</span>
     </a>
 
-    <nav class="hidden items-center gap-1 lg:flex" aria-label="Principal">
+    <nav class="hidden items-center gap-0.5 xl:flex" aria-label="Principal">
       {
         links.map((link) =>
           link.children ? (
@@ -101,7 +102,7 @@ const links: NavItem[] = [
           ) : (
             <a
               href={link.href}
-              class="px-2 py-2 text-sm text-muted no-underline hover:text-gold-bright"
+              class="px-2 py-2 text-sm whitespace-nowrap text-muted no-underline hover:text-gold-bright"
             >
               {link.label}
             </a>
@@ -112,22 +113,14 @@ const links: NavItem[] = [
 
     <div class="flex items-center gap-2 sm:gap-3">
       <a
-        href={whatsappHref()}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden rounded-md border border-gold/30 px-3 py-2 text-sm text-gold-bright no-underline hover:border-gold hover:bg-gold/10 sm:inline-flex"
-      >
-        WhatsApp
-      </a>
-      <a
-        href="#donar"
+        href="/#donar"
         class="bg-gold-sheen inline-flex rounded-md px-4 py-2 text-sm font-semibold text-ink no-underline shadow-[0_0_24px_color-mix(in_oklab,var(--color-gold)_25%,transparent)] hover:brightness-110"
       >
         Donar
       </a>
       <button
         type="button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-gold/25 text-gold-bright lg:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-gold/25 text-gold-bright xl:hidden"
         aria-expanded="false"
         aria-controls="menu-movil"
         data-menu-toggle
@@ -142,7 +135,7 @@ const links: NavItem[] = [
 
   <div
     id="menu-movil"
-    class="hidden border-t border-gold/15 bg-void/95 px-6 py-4 backdrop-blur-xl lg:hidden"
+    class="hidden border-t border-gold/15 bg-void/95 px-6 py-4 backdrop-blur-xl xl:hidden"
     hidden
   >
     <nav class="flex flex-col gap-1" aria-label="Móvil">
@@ -180,22 +173,13 @@ const links: NavItem[] = [
           ),
         )
       }
-      <a
-        href={whatsappHref()}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="py-2 text-base text-gold-bright no-underline"
-        data-menu-link
-      >
-        Escribir por WhatsApp
-      </a>
     </nav>
   </div>
 </header>
 
 <div
   data-menu-backdrop
-  class="fixed inset-0 z-30 hidden bg-void/70 backdrop-blur-md lg:hidden"
+  class="fixed inset-0 z-30 hidden bg-void/70 backdrop-blur-md xl:hidden"
   hidden
   aria-hidden="true"
 ></div>
