@@ -79,16 +79,10 @@ export const HONORES = {
           place: 'Argentina',
         },
         {
-          name: 'Dra. Susan Reverand',
-          detail:
-            'Referente en Cirugía Maxilofacial, cirugía estética facial, rinoplastia ultrasónica y medicina estética',
-          place: 'Venezuela–España',
-        },
-        {
           name: 'Dra. Jhorbelys Rojas Dugarte',
           detail:
             'Distinción especial a la trayectoria en excelencia profesional y compromiso con la vida. Especialidades destacadas en Urología y Piso Pélvico',
-          place: '',
+          place: 'Venezuela',
         },
       ],
     },
