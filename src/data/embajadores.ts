@@ -38,6 +38,18 @@ export const EMBAJADORES = {
       ],
     },
     {
+      id: 'israel',
+      label: 'Israel',
+      items: [
+        {
+          name: 'Miguel Truzman',
+          detail: 'Abogado',
+          place: 'Israel',
+          photo: '/embajadores/miguel.webp',
+        },
+      ],
+    },
+    {
       id: 'trinidad',
       label: 'Trinidad y Tobago',
       items: [
@@ -61,17 +73,17 @@ export const EMBAJADORES = {
         },
       ],
     },
-    {
-      id: 'venezuela',
-      label: 'Venezuela',
-      items: [
-        {
-          name: 'Darda Castillo',
-          detail: 'Desarrolladora Web y Mobile Full-stack',
-          place: 'Venezuela',
-          photo: '/embajadores/darda.webp',
-        },
-      ],
-    },
+    // {
+    //   id: 'venezuela',
+    //   label: 'Venezuela',
+    //   items: [
+    //     {
+    //       name: 'Darda Castillo',
+    //       detail: 'Desarrolladora Web y Mobile Full-stack',
+    //       place: 'Venezuela',
+    //       photo: '/embajadores/darda.webp',
+    //     },
+    //   ],
+    // },
   ],
 } as const;
