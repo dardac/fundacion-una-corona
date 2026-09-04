@@ -66,9 +66,21 @@ export const EMBAJADORES = {
       label: 'Colombia',
       items: [
         {
+          name: 'Javier Salgado Pilonieta',
+          detail: 'Director General. Organización Cívica en Atención de Incidentes - Civicos',
+          place: 'Colombia',
+          photo: '/embajadores/javier.webp',
+        },
+      ],
+    },
+    {
+      id: 'panama',
+      label: 'Panamá',
+      items: [
+        {
           name: 'Antonio Ovalle',
           detail: 'Licenciado e investigador en energías renovables',
-          place: 'Colombia',
+          place: 'Panamá',
           photo: '/embajadores/antonio2.webp',
         },
       ],
