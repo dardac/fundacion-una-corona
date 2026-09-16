@@ -47,14 +47,14 @@ export const MEMBERS = [
     photoThumb: '/miembros/karla-sm.webp',
     bio: 'Abogada en derecho internacional, violencia digital y especialista en migración y protección internacional. Trabaja en la defensa de personas migrantes, refugiadas y poblaciones altamente vulnerables, incluyendo víctimas de trata, tráfico humano y desplazamiento forzado, promoviendo justicia, dignidad humana y acceso a derechos fundamentales.',
   },
-  {
-    id: 'claudio',
-    name: 'Doctor HC Claudio Emilio Pombilio Quevedo',
-    role: 'Relaciones Públicas',
-    photo: '/miembros/claudio.webp',
-    photoThumb: '/miembros/claudio-sm.webp',
-    bio: 'Doctor HC en filosofía, comunicador y escritor. Estratega de comunicación y RRPP de la gala, liderando las alianzas de prensa y la proyección mediática en concordancia oficial con la prestigiosa Revista SUROESTE.',
-  },
+  // {
+  //   id: 'claudio',
+  //   name: 'Doctor HC Claudio Emilio Pombilio Quevedo',
+  //   role: 'Relaciones Públicas',
+  //   photo: '/miembros/claudio.webp',
+  //   photoThumb: '/miembros/claudio-sm.webp',
+  //   bio: 'Doctor HC en filosofía, comunicador y escritor. Estratega de comunicación y RRPP de la gala, liderando las alianzas de prensa y la proyección mediática en concordancia oficial con la prestigiosa Revista SUROESTE.',
+  // },
   {
     id: 'eliezer',
     name: 'Eliezer Sequera',
