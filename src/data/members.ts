@@ -61,19 +61,7 @@ export const MEMBERS = [
     role: 'Jefe de Prensa',
     photo: '/miembros/alfredo.webp',
     photoThumb: '/miembros/alfredo-sm.webp',
-    bio: `El reconocido cantante, locutor y promotor internacional de medios marca su regreso definitivo a Venezuela reimpulsando el sonido de la guaracha zuliana, respaldado por una fructífera gira internacional de reconocimientos.
-
-MARACAIBO / CABIMAS, VENEZUELA — Con una carrera que abarca más de cuatro décadas en la música, la radiodifusión y la estrategia comunicacional en América Latina, el cabimero Alfredo José Rojas Medina celebra sus 46 años de trayectoria artística y mediática. Como parte central de este hito profesional, el artista confirma su regreso a Venezuela —establecido desde mayo de 2026— con el objetivo prioritario de relanzar su orquesta insignia: Alfredo Rojas y su Caribe Show.
-
-Iniciada su andadura musical en 1980 a los 15 años de edad, la voz de Alfredo Rojas ha sido pilar en agrupaciones históricas del género tropical y gaitero, entre las que destacan Los Tocayos de Cabimas, El Gran Caribe, Amor y Gaita, Revelación Gaitera y la orquesta de Nelson Martínez. En 1999, fundó la propuesta bailable de la región al crear Alfredo Rojas y su Caribe Show, agrupación de guaracha zuliana con la que ha recorrido los escenarios más exigentes de Venezuela con su tema El Baile de la Cintura.
-
-De forma paralela, Rojas ha dejado una huella indeleble en la industria de los medios de comunicación. Fundador de la emisora digital TU RADIO AR STEREO (con sede de operaciones en Medellín, Colombia) y estratega de prensa digital de proyección continental, ha liderado campañas para figuras de la talla de Silvestre Dangond, Diveana, Bonny Lovy, Américo, Los Adolescent's Orquesta y Bonny Cepeda.
-
-Una Carrera Blindada por el Reconocimiento Internacional
-
-El marco de este 46° aniversario viene respaldado por un impecable historial de galardones e instituciones que han certificado la calidad y aporte cultural de Alfredo Rojas:
-
-Condecoraciones de Estado y Militares: Homenajeado por el Congreso de la República de Colombia, la Asamblea Departamental de Antioquia, el Ejército Nacional y las Fuerzas Militares de Colombia en reconocimiento a su labor periodística, cultural y comunicacional.`,
+    bio: 'Cantante, locutor y promotor internacional de medios con más de cuatro décadas en la música, la radiodifusión y la comunicación en América Latina. En 1999 fundó Alfredo Rojas y su Caribe Show, referente de la guaracha zuliana, y la emisora digital TU RADIO AR STEREO; como estratega de prensa ha impulsado campañas de proyección continental. Desde mayo de 2026 regresa a Venezuela para relanzar su orquesta insignia, en el marco de sus 46 años de trayectoria, respaldada por homenajes del Congreso de la República de Colombia, la Asamblea Departamental de Antioquia, el Ejército Nacional y las Fuerzas Militares de Colombia.',
   },
   {
     id: 'eliezer',
