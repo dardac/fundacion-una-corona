@@ -62,12 +62,16 @@ const first = MEMBERS[0];
         <h3 class="mt-3 text-balance text-2xl text-gold-bright sm:text-3xl" data-member-name>
           {first.name}
         </h3>
-        <p
-          class="mt-6 min-h-[8rem] text-pretty break-words text-base text-muted sm:text-lg"
+        <div
+          class="mt-6 min-h-[8rem] space-y-4 text-pretty break-words text-base text-muted sm:text-lg"
           data-member-bio
         >
-          {first.bio}
-        </p>
+          {
+            first.bio.split('\n\n').map((paragraph) => (
+              <p>{paragraph}</p>
+            ))
+          }
+        </div>
 
         <div class="mt-10 flex min-w-0 items-center gap-2 sm:gap-3">
           <button
@@ -168,7 +172,7 @@ const first = MEMBERS[0];
     const photo = root.querySelector<HTMLImageElement>('[data-member-photo]');
     const nameEl = root.querySelector('[data-member-name]');
     const roleEl = root.querySelector('[data-member-role]');
-    const bioEl = root.querySelector('[data-member-bio]');
+    const bioEl = root.querySelector<HTMLElement>('[data-member-bio]');
     const panel = document.getElementById('member-panel');
     const prevBtn = root.querySelector<HTMLButtonElement>('[data-member-prev]');
     const nextBtn = root.querySelector<HTMLButtonElement>('[data-member-next]');
@@ -225,7 +229,18 @@ const first = MEMBERS[0];
         if (token !== swapToken) return;
         if (nameEl) nameEl.textContent = nextName;
         if (roleEl) roleEl.textContent = nextRole;
-        if (bioEl) bioEl.textContent = nextBio;
+        if (bioEl) {
+          bioEl.replaceChildren(
+            ...nextBio
+              .split('\n\n')
+              .filter(Boolean)
+              .map((paragraph) => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                return p;
+              }),
+          );
+        }
         if (panel) {
           panel.setAttribute('aria-labelledby', tab.id);
           panel.textContent = nextName;
