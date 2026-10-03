@@ -9,9 +9,9 @@ export const NOMINADOS = {
       place: 'Venezuela–Colombia',
     },
     {
-      name: 'Claudio Pombilio',
-      role: 'Director-Editor Internacional, SUROESTE International Magazine',
-      place: 'Italia',
+      name: 'Roberto Mendoza',
+      role: 'Diseñador de moda de alta costura',
+      place: 'México',
     },
     {
       name: 'Giovanna Ramírez',
@@ -45,9 +45,9 @@ export const NOMINADOS = {
       place: 'Venezuela',
     },
     {
-      name: 'Diana Vásquez',
-      role: 'Venevisión · Periodista. Excelencia audiovisual en comunicación e impacto social',
-      place: 'Venezuela',
+      name: 'María Formisano',
+      role: 'Diseñador de modade alta costura',
+      place: 'Italia',
     },
     {
       name: 'Pamela Hernández',

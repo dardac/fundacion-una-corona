@@ -24,12 +24,12 @@ export const HONORES = {
       edition: 'I Edición España 2026',
       description: 'Distinción Internacional',
       items: [
-        {
-          name: 'Francois Weffer',
-          detail:
-            'Abogado / Comunicador Social. Leyenda de la comunicación y el estilo de moda, 42 años de trayectoria',
-          place: 'Venezuela–Francia',
-        },
+        // {
+        //   name: 'Francois Weffer',
+        //   detail:
+        //     'Abogado / Comunicador Social. Leyenda de la comunicación y el estilo de moda, 42 años de trayectoria',
+        //   place: 'Venezuela–Francia',
+        // },
         {
           name: 'Oscar Ramírez',
           detail:
@@ -86,20 +86,20 @@ export const HONORES = {
         },
       ],
     },
-    {
-      id: 'musical',
-      label: 'Musical del año',
-      edition: 'I Edición España 2026',
-      description: 'Musical del año',
-      items: [
-        {
-          name: 'Jhon Semeco',
-          detail:
-            '«El Poeta de las Emociones». Su extraordinaria trayectoria musical no solo conmueve almas, sino que deja una huella imborrable en la cultura global: Miembro de la Academia de los Latin Grammys; Miembro de la Academia de la Música de España; Patrimonio Cultural y Musical de Venezuela',
-          place: 'Venezuela–España',
-        },
-      ],
-    },
+    // {
+    //   id: 'musical',
+    //   label: 'Musical del año',
+    //   edition: 'I Edición España 2026',
+    //   description: 'Musical del año',
+    //   items: [
+    //     {
+    //       name: 'Jhon Semeco',
+    //       detail:
+    //         '«El Poeta de las Emociones». Su extraordinaria trayectoria musical no solo conmueve almas, sino que deja una huella imborrable en la cultura global: Miembro de la Academia de los Latin Grammys; Miembro de la Academia de la Música de España; Patrimonio Cultural y Musical de Venezuela',
+    //       place: 'Venezuela–España',
+    //     },
+    //   ],
+    // },
     {
       id: 'audiovisual',
       label: 'Productor Audiovisual del año',
@@ -140,11 +140,6 @@ export const HONORES = {
           name: 'Jessica Lezzi',
           detail: 'Defensora de DD.HH.',
           place: 'Argentina',
-        },
-        {
-          name: 'Edison Francisco Martínez Rivas',
-          detail: 'Ex Secretario Técnico y Máxima Autoridad Nacional del CONADIS',
-          place: 'Ecuador',
         },
         {
           name: 'Argenis Angulo',
